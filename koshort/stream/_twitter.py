@@ -3,7 +3,7 @@ import tweepy
 import urllib3
 import re
 import sys
-if sys.version[0] > 2:
+if int(sys.version[0]) > 2:
     import configparser
 else:
     import ConfigParser as configparser
