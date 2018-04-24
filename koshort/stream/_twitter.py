@@ -2,7 +2,11 @@
 import tweepy
 import urllib3
 import re
-import configparser
+import sys
+if sys.version[0] > 2:
+    import configparser
+else:
+    import ConfigParser as configparser
 from argparse import ArgumentParser
 
 
