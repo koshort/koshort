@@ -19,4 +19,4 @@ after_success:
     - coveralls
 
 script:
-    - coverage run --source=konlpy -m py.test
+    - coverage run --source=koshort -m py.test
