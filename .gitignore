@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# temporary data
+config/*_dev.ini
+data/*.txt
