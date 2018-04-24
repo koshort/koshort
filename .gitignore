@@ -103,3 +103,6 @@ ENV/
 # temporary data
 config/*_dev.ini
 data/*.txt
+
+# pytest
+.pytest_cache/*
