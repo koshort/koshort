@@ -17,7 +17,7 @@ def requirements():
         return _openreq('requirements.txt')
 
 setup(
-    name='konlpy',
+    name='koshort',
     version=__version__,
     description='Python package for Korean natural language processing.',
     url='http://koshort.github.io',
