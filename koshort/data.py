@@ -1,11 +1,10 @@
 from __future__ import absolute_import
 from koshort.constants import DATA_DIR
 import os
-import glob
 
 
 def clear():
-    """clear the koshort data directory
+    """clear the koshort output data directory
 
     .. code-block:: python
 
@@ -14,6 +13,7 @@ def clear():
 
     """
 
-    items = glob.glob(DATA_DIR+"/*")
+    items = os.listdir(DATA_DIR)
     for item in items:
         os.remove(item)
+
