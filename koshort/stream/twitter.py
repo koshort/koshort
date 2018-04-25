@@ -20,10 +20,16 @@ __all__ = ['TwitterStreamer']
 
 
 class CorpusListener(tweepy.StreamListener):
-    """CorpusListener is a tweepy listener to listen on filtered list of words.
-    """
-
     def __init__(self, args, cfg, dirname, word_list):
+        """CorpusListener is a tweepy listener to listen on filtered list of words.
+        
+        Args:
+            args (object): arg parser argument object
+            cfg (object): config parser object
+            dirname (str): string of directory
+            word_list (list): list of words
+        """
+
         # WARNING: This underlining keys and tokens 
         # should not be shared or uploaded on any public code repository!
         self.consumer_key = cfg.get('api', 'consumer_key')
