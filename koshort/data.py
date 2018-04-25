@@ -8,6 +8,7 @@ def clear():
     """clear the koshort data directory
 
     .. code-block:: python
+
         >>> import koshort
         >>> koshort.clear()
 
