@@ -1,5 +1,7 @@
 @ECHO OFF
 
+sphinx-apidoc -F -o docs koshort/ --separate
+
 pushd %~dp0
 
 REM Command file for Sphinx documentation

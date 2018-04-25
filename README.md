@@ -4,7 +4,7 @@
 ![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)
 
 한국어 인터넷 언어 크롤링과 처리를 위하여 만들어진 파이썬 패키지 코숏.  
-koshort is a Python package for Korean internet language crawling and processing... or maybe Korean domestic cat.
+koshort is a Python package for Korean internet spoken language crawling and processing... or maybe Korean domestic cat.
 
 * English Documentation (In progress..): [http://koshort.readthedocs.io/](http://koshort.readthedocs.io/)
 * 한국어 문서 (준비중..): [http://koshort.readthedocs.io/](http://koshort.readthedocs.io/)

@@ -1,6 +1,13 @@
 koshort\.stream package
 =======================
 
+Submodules
+----------
+
+.. toctree::
+
+   koshort.stream.twitter
+
 Module contents
 ---------------
 
