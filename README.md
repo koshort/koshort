@@ -6,8 +6,8 @@
 한국어 인터넷 언어 크롤링과 처리를 위하여 만들어진 파이썬 패키지 코숏.  
 koshort is a Python package for Korean internet language crawling and processing... or maybe Korean domestic cat.
 
-* English Documentation: NOT YET!
-* 한국어 문서: NOT YET!
+* [English Documentation (Making)](http://koshort.readthedocs.io/)
+* [한국어 문서 (준비중..)](http://koshort.readthedocs.io/)
 
 ## Examples
 ```shell
@@ -22,3 +22,5 @@ python stream_twitter.py -v -c config/stream_WITH_YOUR_CONFIG_FILE.ini
 그러다가 안녕하세요라고 말하면 내가 참..
 ...
 ```
+
+copyright by 2018 Nyanye with :purple_heart:
