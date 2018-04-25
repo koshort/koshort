@@ -14,7 +14,7 @@ from koshort.constants import DATA_DIR
 def test_twitter_streamer():
     """Test twitter streamer with subprocess system call. """
 
-    command = "python stream_twitter.py -c config/stream_dev.ini -v --filter_retweets --remove_links --remove_mentions"
+    command = "python stream_twitter.py -v --filter_retweets --remove_links --remove_mentions"
     command_list = command.split()
     p = subprocess.Popen(command_list)
     time.sleep(5)
