@@ -19,8 +19,8 @@
 #
 import os
 import sys
-from koshort import __version__
 sys.path.insert(0, os.path.abspath('..'))
+from koshort import __version__
 
 
 # -- General configuration ------------------------------------------------
