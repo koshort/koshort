@@ -5,6 +5,14 @@ import glob
 
 
 def clear():
+    """clear the koshort data directory
+
+    .. code-block:: python
+        >>> import koshort
+        >>> koshort.clear()
+
+    """
+
     items = glob.glob(DATA_DIR+"/*")
     for item in items:
         os.remove(item)

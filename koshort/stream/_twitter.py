@@ -10,6 +10,9 @@ else:
 from argparse import ArgumentParser
 
 
+__all__ = ['TwitterStreamer']
+
+
 class CorpusListener(tweepy.StreamListener):
     """CorpusListener is a tweepy listener to listen on filtered list of words.
     """
@@ -147,15 +150,13 @@ def get_parser():
 
 
 class TwitterStreamer(object):
-    """Start streaming on Twitter with your api keys and tokens."""
-    def __init__(self, dirname, word_list):
-        """Initialize twitter streamer
-        
-        Args:
-            dirname (str): directory to save output files.
-            word_list (list): list of words to be streamed.
-        """
+    """Start streaming on Twitter with your api keys and tokens.
 
+    Args:
+        dirname (str): directory to save output files.
+        word_list (list): list of words to be streamed.
+    """
+    def __init__(self, dirname, word_list):
         parser = get_parser()
         args = parser.parse_args()
         cfg = configparser.ConfigParser()
