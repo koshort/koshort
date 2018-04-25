@@ -32,29 +32,54 @@ class CorpusListener(tweepy.StreamListener):
 
         self.limit = 0
 
+    @staticmethod
+    def delete_links(tweet):
+        return re.sub(r'http\S+', '', tweet)
+    
+    @staticmethod
+    def delete_mentions(tweet):
+        return re.sub(r'@\S+', '', tweet)
+
     def on_status(self, status):
-        data_str = status.text
+        tweet = status.text
 
         # Except potentially repetitive retweets
-        if not "RT @" in data_str:
-            data_str = re.sub(r'http\S+', '', data_str)  # Delete links
-            data_str = re.sub(r'@\S+', '', data_str)  # Delete mentions
-            count = 0
+        def write_tweets_to_files(tweet):
+            if self.args.remove_links:
+                tweet = self.delete_links(tweet)
+            if self.args.remove_mentions:
+                tweet = self.delete_mentions(tweet)
 
-            # counts how many targeting words included in one tweet.
-            for word in self.words:
-                count += data_str.count(word)
+            word_count = 0
 
-            n_word_file = open(self.dirname+str(count)+'.'+self.args.output_extension, 'a', encoding='utf-8')
-            n_word_file.write(data_str)
+            if not self.args.output_as_onefile:
+                # counts how many targeting words included in one tweet.
+                for word in self.words:
+                    word_count += tweet.count(word)
+
+            filename = "{}{}{}.{}".format(
+                self.dirname,
+                self.args.output_prefix,
+                word_count,
+                self.args.output_extension
+                )
+
+            n_word_file = open(filename, 'a', encoding='utf-8')
+            n_word_file.write(tweet)
             n_word_file.write("\n")
 
             if self.args.verbose:
-                print(count, data_str)
+                print(word_count, tweet)
 
             self.limit += 1
 
-        if self.limit == 1000000:
+        if self.args.filter_retweets:
+            if not "RT @" in tweet:
+                write_tweets_to_files(tweet)
+        else:
+            write_tweets_to_files(tweet)
+
+        if self.limit == self.args.tweet_limits:
             return "Done"
 
     def on_error(self, status_code):
@@ -81,22 +106,70 @@ def get_parser():
         type=str
     )
     p.add_argument(
+        '--filter_retweets', 
+        help='do not save potentially repetitive retweets',
+        action="store_true",
+    )
+    p.add_argument(
+        '--remove_links', 
+        help='remove links included into each tweet',
+        action="store_true",
+    )
+    p.add_argument(
+        '--remove_mentions', 
+        help='remove mentions included into each tweet',
+        action="store_true",
+    )
+    p.add_argument(
+        '--output_prefix', 
+        help='prefix of the output file',
+        default='tweet',
+        type=str
+    )
+    p.add_argument(
+        '--output_as_onefile', 
+        help='save output as onefile',
+        action="store_true",
+    )
+    p.add_argument(
         '--output_extension', 
         help='extension of the output file',
         default='txt',
         type=str
     )
+    p.add_argument(
+        '--tweet_limits', 
+        help='stop when this amount of tweets are collected',
+        default=1000000,
+        type=int
+    )
     return p
 
 
-def stream_twitter(dirname, word_list):
-    args = get_parser().parse_args()
-    cfg = configparser.ConfigParser()
-    cfg.read(args.config_file)
-    listener = CorpusListener(args, cfg, dirname, word_list)
-    api = listener.api
-    streamer = tweepy.Stream(auth=api.auth, listener=listener)
-    try:
-        streamer.filter(track=word_list, async=True)
-    except urllib3.exceptions.ProtocolError:
-        stream_twitter(dirname, word_list)
+class TwitterStreamer(object):
+    """Start streaming on Twitter with your api keys and tokens."""
+    def __init__(self, dirname, word_list):
+        """Initialize twitter streamer
+        
+        Args:
+            dirname (str): directory to save output files.
+            word_list (list): list of words to be streamed.
+        """
+
+        parser = get_parser()
+        args = parser.parse_args()
+        cfg = configparser.ConfigParser()
+        cfg.read(args.config_file)
+        listener = CorpusListener(args, cfg, dirname, word_list)
+        api = listener.api
+
+        self.dirname = dirname
+        self.word_list = word_list
+        self.streamer = tweepy.Stream(auth=api.auth, listener=listener)
+
+    def run(self):
+        """Try to stream recursively when it fails due to protocol error. """
+        try:
+            self.streamer.filter(track=self.word_list, async=True)
+        except urllib3.exceptions.ProtocolError:
+            self.run()
