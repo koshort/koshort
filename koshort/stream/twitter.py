@@ -8,11 +8,6 @@ import urllib3
 import re
 import sys
 
-if int(sys.version[0]) > 2:
-    import configparser
-else:
-    import ConfigParser as configparser
-
 from argparse import ArgumentParser
 
 
@@ -20,22 +15,21 @@ __all__ = ['TwitterStreamer']
 
 
 class CorpusListener(tweepy.StreamListener):
-    def __init__(self, args, cfg, dirname, word_list):
+    def __init__(self, args, dirname, word_list):
         """CorpusListener is a tweepy listener to listen on filtered list of words.
         
         Args:
-            args (object): arg parser argument object
-            cfg (object): config parser object
+            args (object): argparser argument namespace
             dirname (str): string of directory
             word_list (list): list of words
         """
 
         # WARNING: This underlining keys and tokens 
         # should not be shared or uploaded on any public code repository!
-        self.consumer_key = cfg.get('api', 'consumer_key')
-        self.consumer_secret = cfg.get('api', 'consumer_secret')
-        self.access_token = cfg.get('api', 'access_token')
-        self.access_token_secret = cfg.get('api', 'access_token_secret')
+        self.consumer_key = args.consumer_key
+        self.consumer_secret = args.consumer_secret
+        self.access_token = args.access_token
+        self.access_token_secret = args.access_token_secret
 
         self.auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         self.auth.set_access_token(self.access_token, self.access_token_secret)
@@ -116,9 +110,20 @@ def get_parser():
         action="store_true"
     )
     p.add_argument(
-        '-c', '--config_file', 
-        help='path to ini format configuration file',
-        type=str
+        '--consumer_key', 
+        help='consumer key',
+    )
+    p.add_argument(
+        '--consumer_secret', 
+        help='consumer secret',
+    )
+    p.add_argument(
+        '--access_token', 
+        help='access token',
+    )
+    p.add_argument(
+        '--access_token_secret', 
+        help='access token secret',
     )
     p.add_argument(
         '--filter_retweets', 
@@ -168,21 +173,23 @@ class TwitterStreamer(object):
         dirname (str): directory to save output files.
         word_list (list): list of words to be streamed.
     """
+
     def __init__(self, dirname, word_list):
         parser = get_parser()
-        args = parser.parse_args()
-        cfg = configparser.ConfigParser()
-        cfg.read(args.config_file)
-        listener = CorpusListener(args, cfg, dirname, word_list)
-        api = listener.api
-
+        self.args, _ = parser.parse_known_args()
         self.dirname = dirname
         self.word_list = word_list
+  
+    def create_listener(self):
+        listener = CorpusListener(self.args, self.dirname, self.word_list)
+        api = listener.api
+
         self.streamer = tweepy.Stream(auth=api.auth, listener=listener)
 
     def run(self):
         """Try to stream recursively when it fails due to protocol error. """
         try:
-            self.streamer.filter(track=self.word_list, async=True)
+            self.streamer.filter(track=self.word_list, async=False)
         except urllib3.exceptions.ProtocolError:
+            print("exception occured")
             self.run()
