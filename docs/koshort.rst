@@ -15,6 +15,7 @@ Submodules
 
    koshort.constants
    koshort.data
+   koshort.dictionary
 
 Module contents
 ---------------

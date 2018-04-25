@@ -14,7 +14,9 @@ class Yok(object):
 
         출처 1) namu.wiki/w/욕설/한국어
 
+
     .. code-block:: python
+
         >>> from koshort.dictionary import Yok
         >>> yok = Yok()
         >>> print(yok)  # see whats inside.
