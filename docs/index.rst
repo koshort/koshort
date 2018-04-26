@@ -25,11 +25,15 @@ For specific descriptions of each module, go see the api documents.
     git clone https://github.com/koshort/koshort.git
     cd koshort
 
-    # Streaming with twitter API
-    python stream_twitter.py -v -c config/stream_WITH_YOUR_CONFIG_FILE.ini
-    (안녕하세요((())) 
-    안녕하세요?8ㅁ8
-    그러다가 안녕하세요라고 말하면 내가 참..
+.. sourcecode:: python
+    >>> from koshort.stream import naver
+    >>> streamer = naver.NaverStreamer()
+    >>> streamer.stream()
+    cj채용
+    온주완의 뮤직쇼
+    유상무
+    현대차
+    ...
 
 
 License
