@@ -19,13 +19,13 @@ Koshort is a Python package for Korean internet trends streaming and processing.
 For step-by-step instructions, follow the :ref:`guide`.
 For specific descriptions of each module, go see the api documents.
 
-.. sourcecode:: bash
+.. sourcecode:: python
 
     # Install koshort
     git clone https://github.com/koshort/koshort.git
     cd koshort
 
-.. sourcecode:: python
+    # python
     >>> from koshort.stream import naver
     >>> streamer = naver.NaverStreamer()
     >>> streamer.stream()
