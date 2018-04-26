@@ -11,9 +11,6 @@ import sys
 from argparse import ArgumentParser
 
 
-__all__ = ['TwitterStreamer']
-
-
 class CorpusListener(tweepy.StreamListener):
     def __init__(self, args, dirname, word_list):
         """CorpusListener is a tweepy listener to listen on filtered list of words.
@@ -99,7 +96,7 @@ class CorpusListener(tweepy.StreamListener):
 
 
 def get_parser():
-    """customized argument parser to set various parameters for SegEngine
+    """customized argument parser to set various parameters.
 
     Returns:
         object: argument parser.
