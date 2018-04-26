@@ -4,7 +4,7 @@ import os
 import sys
 from setuptools import find_packages, setup
 
-__version__ = '0.3.9.1'
+__version__ = '0.3.9.3'
 
 def requirements():
     def _openreq(reqfile):
@@ -20,7 +20,7 @@ setup(
     name='koshort',
     version=__version__,
     description='Python package for Korean natural language processing.',
-    url='http://koshort.github.io',
+    url='http://koshort.readthedocs.io',
     author='nyanye',
     author_email='iam@nyanye.com',
     keywords=['Korean', 'CJK',
