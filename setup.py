@@ -14,7 +14,7 @@ def requirements():
     if sys.version_info >= (3, ):
         return _openreq('requirements.txt')
     else:
-        return _openreq('requirements.txt')
+        raise Exception("Koshort does not support python2.* distribution.")
 
 setup(
     name='koshort',
@@ -32,10 +32,8 @@ setup(
         'Intended Audience :: Education',
         'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Human Machine Interfaces',
