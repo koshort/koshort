@@ -83,4 +83,10 @@ class Yok(object):
         return '\n'.join(self.yok)
 
     def list_attrs(self):
+        """List wordsets included in the class.
+        
+        Returns:
+            list: name of the attributes.
+        """
+
         return list(self.__dict__.keys())
