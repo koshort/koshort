@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Koshort: Korean trends streaming in python
-===================================
+==========================================
 
 .. image:: https://travis-ci.org/koshort/koshort.svg?branch=master
     :alt: Build Status
