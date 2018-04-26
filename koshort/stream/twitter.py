@@ -95,76 +95,6 @@ class CorpusListener(tweepy.StreamListener):
             return False
 
 
-def get_parser():
-    """customized argument parser to set various parameters.
-
-    Returns:
-        object: argument parser.
-    """
-
-    p = ArgumentParser()
-    p.add_argument(
-        '-v', '--verbose', 
-        help="increase verbosity", 
-        action="store_true"
-    )
-    p.add_argument(
-        '--consumer_key', 
-        help='consumer key',
-    )
-    p.add_argument(
-        '--consumer_secret', 
-        help='consumer secret',
-    )
-    p.add_argument(
-        '--access_token', 
-        help='access token',
-    )
-    p.add_argument(
-        '--access_token_secret', 
-        help='access token secret',
-    )
-    p.add_argument(
-        '--filter_retweets', 
-        help='do not save potentially repetitive retweets',
-        action="store_true",
-    )
-    p.add_argument(
-        '--remove_links', 
-        help='remove links included into each tweet',
-        action="store_true",
-    )
-    p.add_argument(
-        '--remove_mentions', 
-        help='remove mentions included into each tweet',
-        action="store_true",
-    )
-    p.add_argument(
-        '--output_prefix', 
-        help='prefix of the output file',
-        default='tweet',
-        type=str
-    )
-    p.add_argument(
-        '--output_as_onefile', 
-        help='save output as onefile',
-        action="store_true",
-    )
-    p.add_argument(
-        '--output_extension', 
-        help='extension of the output file',
-        default='txt',
-        type=str
-    )
-    p.add_argument(
-        '--tweet_limits', 
-        help='stop when this amount of tweets are collected',
-        default=1000000,
-        type=int
-    )
-    return p
-
-
 class TwitterStreamer(object):
     """Start streaming on Twitter with your api keys and tokens.
 
@@ -174,12 +104,82 @@ class TwitterStreamer(object):
     """
 
     def __init__(self, dirname, word_list, async=True):
-        parser = get_parser()
+        parser = self.get_parser()
         self.args, _ = parser.parse_known_args()
         self.dirname = dirname
         self.word_list = word_list
         self.async = async
-  
+
+    @staticmethod
+    def get_parser():
+        """customized argument parser to set various parameters.
+
+        Returns:
+            object: argument parser.
+        """
+
+        p = ArgumentParser()
+        p.add_argument(
+            '-v', '--verbose', 
+            help="increase verbosity", 
+            action="store_true"
+        )
+        p.add_argument(
+            '--consumer_key', 
+            help='consumer key',
+        )
+        p.add_argument(
+            '--consumer_secret', 
+            help='consumer secret',
+        )
+        p.add_argument(
+            '--access_token', 
+            help='access token',
+        )
+        p.add_argument(
+            '--access_token_secret', 
+            help='access token secret',
+        )
+        p.add_argument(
+            '--filter_retweets', 
+            help='do not save potentially repetitive retweets',
+            action="store_true",
+        )
+        p.add_argument(
+            '--remove_links', 
+            help='remove links included into each tweet',
+            action="store_true",
+        )
+        p.add_argument(
+            '--remove_mentions', 
+            help='remove mentions included into each tweet',
+            action="store_true",
+        )
+        p.add_argument(
+            '--output_prefix', 
+            help='prefix of the output file',
+            default='tweet',
+            type=str
+        )
+        p.add_argument(
+            '--output_as_onefile', 
+            help='save output as onefile',
+            action="store_true",
+        )
+        p.add_argument(
+            '--output_extension', 
+            help='extension of the output file',
+            default='txt',
+            type=str
+        )
+        p.add_argument(
+            '--tweet_limits', 
+            help='stop when this amount of tweets are collected',
+            default=1000000,
+            type=int
+        )
+        return p
+
     def create_listener(self):
         listener = CorpusListener(self.args, self.dirname, self.word_list)
         api = listener.api
