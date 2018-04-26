@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Koshort Documentation
+Koshort: Korean trends streaming in python
 ===================================
 
 .. image:: https://travis-ci.org/koshort/koshort.svg?branch=master
@@ -14,7 +14,7 @@ Koshort Documentation
     :alt: Documentation Status
     :target: http://koshort.readthedocs.io/en/latest/?badge=latest
 
-Koshort is a Python package for Korean internet spoken language crawling and processing... or maybe abbreviation of Korean domestic cat.
+Koshort is a Python package for Korean internet trends streaming and processing... or maybe abbreviation of Korean domestic cat.
 
 For step-by-step instructions, follow the :ref:`guide`.
 For specific descriptions of each module, go see the api documents.
