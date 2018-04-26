@@ -3,7 +3,10 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
 
-from urllib.request import urlopen
+try:
+    from urllib.request import urlopen
+except ImportError:
+    from urllib import urlopen
 from bs4 import BeautifulSoup
 from threading import Thread
 from koshort.data import StringWriter
