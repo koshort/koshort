@@ -80,16 +80,18 @@ class CorpusListener(tweepy.StreamListener):
             if self.args.verbose:
                 print(word_count, tweet)
 
-            self.limit += 1
-
         if self.args.filter_retweets:
             if not "RT @" in tweet:
                 write_tweets_to_files(tweet)
+                self.limit += 1
+                if self.limit == self.args.tweet_limits:
+                    return False
+
         else:
             write_tweets_to_files(tweet)
-
-        if self.limit == self.args.tweet_limits:
-            return "Done"
+            self.limit += 1
+            if self.limit == self.args.tweet_limits:
+                return False
 
     def on_error(self, status_code):
         if status_code == 420:  # if connection failed
@@ -174,11 +176,12 @@ class TwitterStreamer(object):
         word_list (list): list of words to be streamed.
     """
 
-    def __init__(self, dirname, word_list):
+    def __init__(self, dirname, word_list, async=True):
         parser = get_parser()
         self.args, _ = parser.parse_known_args()
         self.dirname = dirname
         self.word_list = word_list
+        self.async = async
   
     def create_listener(self):
         listener = CorpusListener(self.args, self.dirname, self.word_list)
@@ -189,7 +192,7 @@ class TwitterStreamer(object):
     def run(self):
         """Try to stream recursively when it fails due to protocol error. """
         try:
-            self.streamer.filter(track=self.word_list, async=False)
+            self.streamer.filter(track=self.word_list, async=self.async)
         except urllib3.exceptions.ProtocolError:
             print("exception occured")
             self.run()
