@@ -14,7 +14,8 @@ def requirements():
     if sys.version_info >= (3, ):
         return _openreq('requirements.txt')
     else:
-        raise Exception("Koshort does not support python2.* distribution.")
+        return _openreq('requirements.txt')
+        # raise Exception("Koshort does not support python2.* distribution.")  # This is final decision to deprecate 2.* if needed..
 
 setup(
     name='koshort',
