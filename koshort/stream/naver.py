@@ -31,7 +31,7 @@ class NaverStreamer(object):
         parser = self.get_parser()
 
         self.url = 'https://www.naver.com/'
-        self.args = parser.parse_args()
+        self.args, _ = parser.parse_known_args()
         self.writer = StringWriter(self.args.filename)
 
     @staticmethod
