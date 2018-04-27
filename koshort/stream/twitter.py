@@ -9,24 +9,25 @@ import re
 import sys
 
 from argparse import ArgumentParser
+from koshort.constants import DATA_DIR, ALPHABET
 
 
 class CorpusListener(tweepy.StreamListener):
-    def __init__(self, args, dirname, word_list):
+    def __init__(self, options, dirname, word_list):
         """CorpusListener is a tweepy listener to listen on filtered list of words.
         
         Args:
-            args (object): argparser argument namespace
+            options (object): argparser argument namespace
             dirname (str): string of directory
             word_list (list): list of words
         """
 
         # WARNING: This underlining keys and tokens 
         # should not be shared or uploaded on any public code repository!
-        self.consumer_key = args.consumer_key
-        self.consumer_secret = args.consumer_secret
-        self.access_token = args.access_token
-        self.access_token_secret = args.access_token_secret
+        self.consumer_key = options.consumer_key
+        self.consumer_secret = options.consumer_secret
+        self.access_token = options.access_token
+        self.access_token_secret = options.access_token_secret
 
         self.auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         self.auth.set_access_token(self.access_token, self.access_token_secret)
@@ -34,7 +35,7 @@ class CorpusListener(tweepy.StreamListener):
 
         self.dirname = dirname
         self.words = word_list
-        self.args = args
+        self.options = options
 
         self.limit = 0
 
@@ -51,43 +52,43 @@ class CorpusListener(tweepy.StreamListener):
 
         # Except potentially repetitive retweets
         def write_tweets_to_files(tweet):
-            if self.args.remove_links:
+            if self.options.remove_links:
                 tweet = self.delete_links(tweet)
-            if self.args.remove_mentions:
+            if self.options.remove_mentions:
                 tweet = self.delete_mentions(tweet)
 
             word_count = 0
 
-            if not self.args.output_as_onefile:
+            if not self.options.output_as_onefile:
                 # counts how many targeting words included in one tweet.
                 for word in self.words:
                     word_count += tweet.count(word)
 
             filename = "{}{}{}.{}".format(
                 self.dirname,
-                self.args.output_prefix,
+                self.options.output_prefix,
                 word_count,
-                self.args.output_extension
+                self.options.output_extension
                 )
 
             n_word_file = open(filename, 'a', encoding='utf-8')
             n_word_file.write(tweet)
             n_word_file.write("\n")
 
-            if self.args.verbose:
+            if self.options.verbose:
                 print(word_count, tweet)
 
-        if self.args.filter_retweets:
+        if self.options.filter_retweets:
             if not "RT @" in tweet:
                 write_tweets_to_files(tweet)
                 self.limit += 1
-                if self.limit == self.args.tweet_limits:
+                if self.limit == self.options.tweet_limits:
                     return False
 
         else:
             write_tweets_to_files(tweet)
             self.limit += 1
-            if self.limit == self.args.tweet_limits:
+            if self.limit == self.options.tweet_limits:
                 return False
 
     def on_error(self, status_code):
@@ -103,9 +104,9 @@ class TwitterStreamer(object):
         word_list (list): list of words to be streamed.
     """
 
-    def __init__(self, dirname, word_list, async=True):
+    def __init__(self, dirname=DATA_DIR, word_list=ALPHABET, async=True):
         parser = self.get_parser()
-        self.args, _ = parser.parse_known_args()
+        self.options, _ = parser.parse_known_args()
         self.dirname = dirname
         self.word_list = word_list
         self.async = async
@@ -180,8 +181,14 @@ class TwitterStreamer(object):
         )
         return p
 
+    def show_options(self):
+        """Print out options available and predefined values."""
+
+        for attr, value in sorted(vars(self.options).items()):
+            print("{} = {}".format(attr, value))
+
     def create_listener(self):
-        listener = CorpusListener(self.args, self.dirname, self.word_list)
+        listener = CorpusListener(self.options, self.dirname, self.word_list)
         api = listener.api
 
         self.streamer = tweepy.Stream(auth=api.auth, listener=listener)
@@ -193,3 +200,5 @@ class TwitterStreamer(object):
         except urllib3.exceptions.ProtocolError:
             print("exception occured")
             self.run()
+        except ValueError:
+            raise Exception("You have provided wrong twitter api information.")

@@ -34,8 +34,8 @@ class NaverStreamer(object):
         parser = self.get_parser()
 
         self.url = 'https://www.naver.com/'
-        self.args, _ = parser.parse_known_args()
-        self.writer = StringWriter(self.args.filename)
+        self.options, _ = parser.parse_known_args()
+        self.writer = StringWriter(self.options.filename)
 
     @staticmethod
     def get_parser():
@@ -74,6 +74,12 @@ class NaverStreamer(object):
         )
         return p
 
+    def show_options(self):
+        """Print out options available and predefined values."""
+
+        for attr, value in sorted(vars(self.options).items()):
+            print("{} = {}".format(attr, value))
+
     def get_current_trend(self):
         """Get current top trending words
         
@@ -100,17 +106,17 @@ class NaverStreamer(object):
 
         counts, keywords = self.get_current_trend()
 
-        if self.args.display_rank:
+        if self.options.display_rank:
             for count, keyword in zip(counts, keywords):
                 pair = "{}.{}".format(count, keyword)
                 self.writer.write(pair)
-                if self.args.verbose:
+                if self.options.verbose:
                     print(pair)
                 
         else:
             for keyword in keywords:
                 self.writer.write(keyword)
-                if self.args.verbose:
+                if self.options.verbose:
                     print(keyword)
 
     def job(self, interval):
@@ -121,7 +127,7 @@ class NaverStreamer(object):
         """
 
         n_try = 0
-        while (self.args.n_limits == 0) | (self.args.n_limits > n_try):
+        while (self.options.n_limits == 0) | (self.options.n_limits > n_try):
             n_try += 1
             self.save_and_print()
             sleep(interval)
