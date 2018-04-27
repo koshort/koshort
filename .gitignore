@@ -106,3 +106,6 @@ data/*.txt
 
 # pytest
 .pytest_cache/*
+
+# debugging
+*_dev.py
