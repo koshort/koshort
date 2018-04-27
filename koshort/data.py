@@ -19,6 +19,24 @@ def clear():
         os.remove(item)
 
 
+def listdir():
+    """list koshort default data directory.
+
+    .. code-block:: python
+        
+        >>> import koshort
+        >>> koshort.listdir()
+    
+    """
+
+    print(os.listdir(DATA_DIR))
+
+
+
+class CorpusLoader(object):
+    pass
+
+
 class StringWriter(object):
     def __init__(self, filename):
         self.writer = open(DATA_DIR+filename, mode='a', encoding='utf-8')
