@@ -43,6 +43,16 @@ Koshort is Open Source Software, and is released under the license below:
 
 - `GPL v3 or above <http://gnu.org/licenses/gpl.html>`_
 
+User guide
+----------
+
+.. toctree::
+  :glob:
+  :maxdepth: 2
+
+  streamer
+  examples
+
 API
 ---
 
