@@ -7,9 +7,10 @@ import tweepy
 import urllib3
 import re
 import sys
+import colorama
 
-from argparse import ArgumentParser
 from koshort.constants import DATA_DIR, ALPHABET
+from koshort.stream import BaseStreamer
 
 
 class CorpusListener(tweepy.StreamListener):
@@ -38,6 +39,8 @@ class CorpusListener(tweepy.StreamListener):
         self.options = options
 
         self.limit = 0
+
+        colorama.init()
 
     @staticmethod
     def delete_links(tweet):
@@ -76,6 +79,9 @@ class CorpusListener(tweepy.StreamListener):
             n_word_file.write("\n")
 
             if self.options.verbose:
+                for word in self.words:
+                    tweet = (colorama.Fore.BLUE+word).join(tweet.split(word))
+                    tweet = (word+colorama.Fore.RESET).join(tweet.split(word))
                 print(word_count, tweet)
 
         if self.options.filter_retweets:
@@ -96,7 +102,7 @@ class CorpusListener(tweepy.StreamListener):
             return False
 
 
-class TwitterStreamer(object):
+class TwitterStreamer(BaseStreamer):
     """Start streaming on Twitter with your api keys and tokens.
 
     Args:
@@ -106,80 +112,65 @@ class TwitterStreamer(object):
 
     def __init__(self, dirname=DATA_DIR, word_list=ALPHABET, async=True):
         parser = self.get_parser()
-        self.options, _ = parser.parse_known_args()
-        self.dirname = dirname
-        self.word_list = word_list
-        self.async = async
-
-    @staticmethod
-    def get_parser():
-        """customized argument parser to set various parameters.
-
-        Returns:
-            object: argument parser.
-        """
-
-        p = ArgumentParser()
-        p.add_argument(
-            '-v', '--verbose', 
-            help="increase verbosity", 
-            action="store_true"
-        )
-        p.add_argument(
+        parser.add_argument(
             '--consumer_key', 
             help='consumer key',
         )
-        p.add_argument(
+        parser.add_argument(
             '--consumer_secret', 
             help='consumer secret',
         )
-        p.add_argument(
+        parser.add_argument(
             '--access_token', 
             help='access token',
         )
-        p.add_argument(
+        parser.add_argument(
             '--access_token_secret', 
             help='access token secret',
         )
-        p.add_argument(
+        parser.add_argument(
             '--filter_retweets', 
             help='do not save potentially repetitive retweets',
             action="store_true",
         )
-        p.add_argument(
+        parser.add_argument(
             '--remove_links', 
             help='remove links included into each tweet',
             action="store_true",
         )
-        p.add_argument(
+        parser.add_argument(
             '--remove_mentions', 
             help='remove mentions included into each tweet',
             action="store_true",
         )
-        p.add_argument(
+        parser.add_argument(
             '--output_prefix', 
             help='prefix of the output file',
             default='tweet',
             type=str
         )
-        p.add_argument(
+        parser.add_argument(
             '--output_as_onefile', 
             help='save output as onefile',
             action="store_true",
         )
-        p.add_argument(
+        parser.add_argument(
             '--output_extension', 
             help='extension of the output file',
             default='txt',
             type=str
         )
-        p.add_argument(
+        parser.add_argument(
             '--tweet_limits', 
             help='stop when this amount of tweets are collected',
             default=1000000,
             type=int
         )
-        return p
+
+        self.options, _ = parser.parse_known_args()
+        self.dirname = dirname
+        self.word_list = word_list
+        self.async = async
 
     def show_options(self):
         """Print out options available and predefined values."""
@@ -200,5 +191,3 @@ class TwitterStreamer(object):
         except urllib3.exceptions.ProtocolError:
             print("exception occured")
             self.run()
-        except ValueError:
-            raise Exception("You have provided wrong twitter api information.")
