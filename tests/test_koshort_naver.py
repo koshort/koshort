@@ -10,9 +10,9 @@ import glob
 
 def test_naver_streamer():
     naver = NaverStreamer()
-    naver.args.n_limits = 1
-    naver.args.display_rank = True
-    naver.args.verbose = True
+    naver.options.n_limits = 1
+    naver.options.display_rank = True
+    naver.options.verbose = True
     naver.stream(async=False, interval=0)
 
 
