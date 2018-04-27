@@ -3,18 +3,17 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
 
-try:
-    from urllib.request import urlopen
-except ImportError:
-    from urllib import urlopen
+from urllib.request import urlopen
 from bs4 import BeautifulSoup
-from threading import Thread
-from koshort.data import StringWriter
-from time import sleep
 from argparse import ArgumentParser
+from threading import Thread
+from time import sleep
+
+from koshort.data import StringWriter
+from koshort.stream import BaseStreamer
 
 
-class NaverStreamer(object):
+class NaverStreamer(BaseStreamer):
     """NaverStreamer helps to stream naver trending keywords asynchronously.
     
     ..code-block:: python
@@ -32,53 +31,31 @@ class NaverStreamer(object):
 
     def __init__(self):
         parser = self.get_parser()
-
-        self.url = 'https://www.naver.com/'
-        self.options, _ = parser.parse_known_args()
-        self.writer = StringWriter(self.options.filename)
-
-    @staticmethod
-    def get_parser():
-        """customized argument parser to set various parameters
-
-        Returns:
-            object: argument parser.
-        """
-
-        p = ArgumentParser()
-        p.add_argument(
-            '-v', '--verbose', 
-            help="increase verbosity", 
-            action="store_true"
-        )
-        p.add_argument(
+        parser.add_argument(
             '-d', '--display_rank', 
             help="display rank in results and commandline.", 
             action="store_true"
         )
-        p.add_argument(
+        parser.add_argument(
             '-i', '--interval', 
             help="streaming interval(secs)", 
             type=int
         )
-        p.add_argument(
+        parser.add_argument(
             '-n', '--n_limits', 
             help="stop when this amount of trends are collected. 0 for forever", 
             default=10,
             type=int
         )
-        p.add_argument(
+        parser.add_argument(
             '--filename', 
             help="filename to be saved.", 
             default="trends.txt"
         )
-        return p
 
-    def show_options(self):
-        """Print out options available and predefined values."""
-
-        for attr, value in sorted(vars(self.options).items()):
-            print("{} = {}".format(attr, value))
+        self.url = 'https://www.naver.com/'
+        self.options, _ = parser.parse_known_args()
+        self.writer = StringWriter(self.options.filename)
 
     def get_current_trend(self):
         """Get current top trending words
