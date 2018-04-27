@@ -21,11 +21,6 @@ For specific descriptions of each module, go see the api documents.
 
 .. sourcecode:: python
 
-    # Install koshort
-    git clone https://github.com/koshort/koshort.git
-    cd koshort
-
-    # python
     >>> from koshort.stream import naver
     >>> streamer = naver.NaverStreamer()
     >>> streamer.stream()
