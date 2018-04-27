@@ -32,10 +32,9 @@ from koshort import __version__
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.viewcode']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.intersphinx',
+              'sphinx.ext.todo', 'sphinx.ext.viewcode',
+              'sphinx.ext.extlinks']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -101,6 +100,7 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+# html_style = 'konlpy.css'
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -110,7 +110,9 @@ html_static_path = ['_static']
 html_sidebars = {
     '**': [
         'about.html',
+        'sidebar-header.html',
         'navigation.html',
+        'sidebar-footer.html',
         'relations.html',  # needs 'show_related': True theme option to display
         'searchbox.html',
         'donate.html',
@@ -174,8 +176,15 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-
-
-
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
+
+extlinks = {
+    'commit': ('https://github.com/koshort/koshort/commit/%s', ''),
+    'committer': ('https://github.com/%s', ''),
+    'issue': ('https://github.com/koshort/koshort/issues/%s', '#'),
+}
+
+# i18n
+locale_dirs = ['locale']
+gettext_compact = True
