@@ -9,6 +9,7 @@ class InteractiveStreamer(BaseStreamer):
         parser.add_argument(
             '-i', '--interval', 
             help="streaming interval(secs)", 
+            deaulft=100,
             type=int
         )
         self.options, _ = parser.parse_known_args()
@@ -18,3 +19,6 @@ class InteractiveStreamer(BaseStreamer):
 
     def get_trend(self):
         self.trend = self.naver.get_current_trend()
+
+    def interval_switcher(self):
+        return NotImplemented
