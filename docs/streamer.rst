@@ -10,8 +10,8 @@ Naver is a most famous Korean search engine website and they provides the most s
 
     >>> from koshort.stream.naver import NaverStreamer
     >>> streamer = NaverStreamer()
-    >>> streamer.args.verbose = True  # Print streaming results.
-    >>> streamer.args.display_rank = True  # Print ranking of the keywords.
+    >>> streamer.options.verbose = True  # Print streaming results.
+    >>> streamer.options.display_rank = True  # Print ranking of the keywords.
     >>> streamer.n_limits = 5  # stop streaming when n amount of data gathered.
     >>> streamer.stream(interval=30)  # crawl every 30 seconds.
     cj채용
@@ -33,22 +33,32 @@ Twitter is one of the best source to find a Korean spoken-language and short mes
     >>> # Initialize streamer with path to save data and list of words to be used in streaming.
     >>> app = TwitterStreamer("data/", ["가","나","다","라"], async=True)  # You can use out-of-the-box Threading with async=True
     >>> # Show options available
-    >>> print(app.args)
-    Namespace(access_token=None, access_token_secret=None, consumer_key=None, consumer_secret=None, 
-              filter_retweets=False, output_as_onefile=False, output_extension='txt', output_prefix='tweet', 
-              remove_links=False, remove_mentions=False, tweet_limits=1000000, verbose=False)
+    >>> app.show_options()
+    access_token = None
+    access_token_secret = None
+    consumer_key = None
+    consumer_secret = None
+    filter_retweets = False
+    output_as_onefile = False
+    output_extension = txt
+    output_prefix = tweet
+    remove_links = False
+    remove_mentions = False
+    tweet_limits = 1000000
+    verbose = False
     >>> # Set the options you desire
-    >>> app.args.consumer_key = ''
-    >>> app.args.consumer_secret = ''
-    >>> app.args.access_token = ''
-    >>> app.args.access_token_secret = ''
-    >>> app.args.filter_retweets=True
-    >>> app.args.output_extension='twt'
-    >>> app.args.output_prefix=''
-    >>> app.args.remove_links=True
-    >>> app.args.remove_mentions=True
-    >>> app.args.tweet_limits=10
-    >>> app.args.verbose=True
+    >>> # Underlining consumer key, consumer secret, access token, access token secret must be provided.
+    >>> app.options.consumer_key = '' 
+    >>> app.options.consumer_secret = ''
+    >>> app.options.access_token = ''
+    >>> app.options.access_token_secret = ''
+    >>> app.options.filter_retweets=True
+    >>> app.options.output_extension='twt'
+    >>> app.options.output_prefix=''
+    >>> app.options.remove_links=True
+    >>> app.options.remove_mentions=True
+    >>> app.options.tweet_limits=10
+    >>> app.options.verbose=True
     >>> # Initialize application and launch it
     >>> app.create_listener()
     >>> app.run()
