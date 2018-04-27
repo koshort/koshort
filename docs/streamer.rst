@@ -8,7 +8,7 @@ Naver is a most famous Korean search engine website and they provides the most s
 
 ..code-block:: python
 
-    >>> from koshort.stream.naver import NaverStreamer
+    >>> from koshort.stream import NaverStreamer
     >>> streamer = NaverStreamer()
     >>> streamer.options.verbose = True  # Print streaming results.
     >>> streamer.options.display_rank = True  # Print ranking of the keywords.

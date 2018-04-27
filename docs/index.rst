@@ -21,8 +21,8 @@ For specific descriptions of each module, go see the api documents.
 
 .. sourcecode:: python
 
-    >>> from koshort.stream import naver
-    >>> streamer = naver.NaverStreamer()
+    >>> from koshort.stream import NaverStreamer
+    >>> streamer = NaverStreamer()
     >>> streamer.stream()
     cj채용
     온주완의 뮤직쇼
