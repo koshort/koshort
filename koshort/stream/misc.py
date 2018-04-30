@@ -1,24 +1,42 @@
-from koshort.stream import NaverStreamer, TwitterStreamer, BaseStreamer
+from time import sleep
+from koshort.stream import BaseStreamer, TwitterStreamer
+from koshort.stream.naver import get_current_trend
 
 
-class InteractiveStreamer(BaseStreamer):
-    """Interactively combine two streamers to stream correlated data."""
+class NavtterStreamer(BaseStreamer):
+    """Start streaming of twitter about naver's top trending keywords. 
+
+    ..code-block:: python
+
+        >>> from koshort.stream import NavtterStreamer
+        >>> streamer = NavtterStreamer()
+        >>> streamer.naver.
+
+    """
 
     def __init__(self):
         parser = self.get_parser()
         parser.add_argument(
             '-i', '--interval', 
             help="streaming interval(secs)", 
-            deaulft=100,
+            default=100,
             type=int
         )
         self.options, _ = parser.parse_known_args()
-        self.naver = NaverStreamer()
-        self.twitter = TwitterStreamer()
+        self.twitter  = TwitterStreamer()
         self.trend = None
+        self.streamer = None
 
     def get_trend(self):
-        self.trend = self.naver.get_current_trend()
+        _, self.trend = get_current_trend()
+        if self.options.verbose:
+            print(self.trend)
 
-    def interval_switcher(self):
-        return NotImplemented
+    def job(self):
+        self.get_trend()
+        twitter = TwitterStreamer(word_list=self.trend, async=False)
+        twitter.options = self.twitter.options
+        twitter.options.time_limits = self.options.interval
+        twitter.create_listener()
+        twitter.job()
+        self.job()
