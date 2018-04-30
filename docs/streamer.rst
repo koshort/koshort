@@ -24,6 +24,7 @@ Streaming filtered tweets
 -------------------------
 
 Twitter is one of the best source to find a Korean spoken-language and short messages. (where idea of the name Koshort came from)
+If you don't already have a twitter API access, please refer `here <https://apps.twitter.com/>`
 
 ..code-block:: python
 
