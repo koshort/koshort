@@ -6,14 +6,17 @@ from __future__ import division
 from koshort.stream.naver import NaverStreamer
 from koshort.constants import DATA_DIR
 import glob
+import pytest
 
 
-def test_naver_streamer():
+@pytest.mark.parametrize("async", [(True), (False)])
+def test_naver_streamer(async):
     naver = NaverStreamer()
     naver.options.n_limits = 1
     naver.options.display_rank = True
     naver.options.verbose = True
-    naver.stream(async=False, interval=0)
+    naver.options.interval = 3
+    naver.stream(async=async)
 
 
 def test_result_exists():

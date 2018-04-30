@@ -6,11 +6,11 @@ from __future__ import division
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from argparse import ArgumentParser
-from threading import Thread
 from time import sleep
 
 from koshort.data import StringWriter
 from koshort.stream import BaseStreamer
+from koshort.threading import PropagatingThread
 
 
 class NaverStreamer(BaseStreamer):
@@ -39,6 +39,7 @@ class NaverStreamer(BaseStreamer):
         parser.add_argument(
             '-i', '--interval', 
             help="streaming interval(secs)", 
+            default=60,
             type=int
         )
         parser.add_argument(
@@ -96,7 +97,7 @@ class NaverStreamer(BaseStreamer):
                 if self.options.verbose:
                     print(keyword)
 
-    def job(self, interval):
+    def job(self):
         """Streaming job with intervals.
         
         Args:
@@ -107,11 +108,4 @@ class NaverStreamer(BaseStreamer):
         while (self.options.n_limits == 0) | (self.options.n_limits > n_try):
             n_try += 1
             self.save_and_print()
-            sleep(interval)
-
-    def stream(self, interval=60, async=True):
-        if async:
-            self._thread = Thread(target=lambda: self.job(interval))
-            self._thread.start()
-        else:
-            self.job(interval)
+            sleep(self.options.interval)

@@ -4,6 +4,8 @@ from __future__ import absolute_import
 from __future__ import division
 
 from argparse import ArgumentParser
+from koshort.threading import PropagatingThread
+import urllib3
 
 
 class BaseStreamer(object):
@@ -27,3 +29,15 @@ class BaseStreamer(object):
 
         for attr, value in sorted(vars(self.options).items()):
             print("{} = {}".format(attr, value))
+
+    def stream(self, async=True):
+        try:
+            if async:
+                    self._thread = PropagatingThread(target=self.job)
+                    self._thread.start()
+                    print("ProtocolError has raised but continue to stream.")
+                    self.stream()
+            else:
+                self.job()
+        except urllib3.exceptions.ProtocolError:
+            self.stream(async=async)
