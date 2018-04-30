@@ -61,7 +61,7 @@ Twitter is one of the best source to find a Korean spoken-language and short mes
     >>> app.options.verbose=True
     >>> # Initialize application and launch it
     >>> app.create_listener()
-    >>> app.run()
+    >>> app.stream()
     2 오늘ㄴ셤끗나면 파판안하고 그림그려야지 컴션 다 끗내고싶어 낼까지
     1  다 #더쇼 #빅스LR 투표
     2 월요일에 브레이커스에 가서 기점이를 만났어!!일도 잘하고 다 완벽해!!!!!!!!!!
