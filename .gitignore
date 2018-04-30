@@ -109,3 +109,10 @@ data/*.txt
 
 # debugging
 *_dev.py
+*_dev.bat
+
+# not implemented
+koshort/tag
+mecab*
+goorm*
+data/*
