@@ -35,9 +35,8 @@ class BaseStreamer(object):
             if async:
                     self._thread = PropagatingThread(target=self.job)
                     self._thread.start()
-                    print("ProtocolError has raised but continue to stream.")
-                    self.stream()
             else:
                 self.job()
         except urllib3.exceptions.ProtocolError:
+            print("ProtocolError has raised but continue to stream.")
             self.stream(async=async)
