@@ -7,7 +7,7 @@ class NavtterStreamer(BaseStreamer):
     """Start streaming of twitter about naver's current top trending keywords. 
     In order to use NavtterStreamer, you have to set-up both twitter and Navtter's options.
 
-    ..code-block:: python
+    .. code-block:: python
 
         from koshort.stream import NavtterStreamer
 
