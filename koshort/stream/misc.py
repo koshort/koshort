@@ -4,13 +4,30 @@ from koshort.stream.naver import get_current_trend
 
 
 class NavtterStreamer(BaseStreamer):
-    """Start streaming of twitter about naver's top trending keywords. 
+    """Start streaming of twitter about naver's current top trending keywords. 
+    In order to use NavtterStreamer, you have to set-up both twitter and Navtter's options.
 
     ..code-block:: python
 
-        >>> from koshort.stream import NavtterStreamer
-        >>> streamer = NavtterStreamer()
-        >>> streamer.naver.
+        from koshort.stream import NavtterStreamer
+
+        app = NavtterStreamer()
+        app.show_options()  # Print available options
+        app.options.interval = 3600  # Update naver trends every 3600 secs
+        app.options.verbose = True  # Print trends
+
+        # Your twitter api keys and tokens.
+        app.twitter.options.consumer_key = 'consumer_key'
+        app.twitter.options.consumer_secret = 'consumer_secret'
+        app.twitter.options.access_token = 'access_token'
+        app.twitter.options.access_token_secret = 'access_token_secret'
+
+        # Filter retweets to prevent potential repetition.
+        app.twitter.options.filter_retweets = True
+
+        # Print tweets.
+        app.twitter.options.verbose = True
+        app.stream()
 
     """
 
