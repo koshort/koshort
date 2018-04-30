@@ -7,6 +7,7 @@ import tweepy
 import urllib3
 import re
 import sys
+import time
 import colorama  # Colorama streaming verbosity.
 
 from koshort.constants import DATA_DIR, ALPHABET
@@ -39,6 +40,7 @@ class CorpusListener(tweepy.StreamListener):
         self.options = options
 
         self.limit = 0
+        self.init_time = time.time()
 
         colorama.init()
 
@@ -88,7 +90,8 @@ class CorpusListener(tweepy.StreamListener):
             if not "RT @" in tweet:
                 write_tweets_to_files(tweet)
                 self.limit += 1
-                if self.limit == self.options.tweet_limits:
+                if (self.limit == self.options.tweet_limits) | (
+                    (time.time() - self.init_time) >= self.options.time_limits):
                     return False
 
         else:
@@ -108,9 +111,10 @@ class TwitterStreamer(BaseStreamer):
     Args:
         dirname (str): directory to save output files.
         word_list (list): list of words to be streamed.
+        async (bool): if true, apply threading in tweepy layer.
     """
 
-    def __init__(self, dirname=DATA_DIR, word_list=ALPHABET, async=True):
+    def __init__(self, dirname=DATA_DIR, word_list=ALPHABET, async=False):
         parser = self.get_parser()
         parser.add_argument(
             '--consumer_key', 
@@ -163,6 +167,12 @@ class TwitterStreamer(BaseStreamer):
         parser.add_argument(
             '--tweet_limits', 
             help='stop when this amount of tweets are collected',
+            default=1000000,
+            type=int
+        )
+        parser.add_argument(
+            '--time_limits', 
+            help='stop when n secs elapsed',
             default=1000000,
             type=int
         )
