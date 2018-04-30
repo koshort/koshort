@@ -13,6 +13,29 @@ from koshort.stream import BaseStreamer
 from koshort.threading import PropagatingThread
 
 
+def get_current_trend():
+    """Get current top trending words from naver
+    
+    Returns:
+        counts: list of count
+        keywords: list of keyword
+    """
+
+    url = 'https://www.naver.com/'
+    html = urlopen(url)
+    soup = BeautifulSoup(html, 'html.parser')
+    counts = []
+    keywords = []
+
+    for item in soup.find("div", {"class":"ah_roll_area PM_CL_realtimeKeyword_rolling"}).findAll("li", {"class":"ah_item"}):
+        count = item.find("span", {"class":"ah_r"}).getText()
+        keyword = item.find("span", {"class":"ah_k"}).getText()
+        counts.append(count)
+        keywords.append(keyword)
+    
+    return counts, keywords
+
+
 class NaverStreamer(BaseStreamer):
     """NaverStreamer helps to stream naver trending keywords asynchronously.
     
@@ -54,36 +77,13 @@ class NaverStreamer(BaseStreamer):
             default="trends.txt"
         )
 
-        self.url = 'https://www.naver.com/'
         self.options, _ = parser.parse_known_args()
         self.writer = StringWriter(self.options.filename)
-
-    def get_current_trend(self):
-        """Get current top trending words
-        
-        Returns:
-            counts: list of count
-            keywords: list of keyword
-        """
-
-        html = urlopen(self.url)
-        soup = BeautifulSoup(html, 'html.parser')
-        counts = []
-        keywords = []
-
-        for item in soup.find("div", {"class":"ah_roll_area PM_CL_realtimeKeyword_rolling"}).findAll("li", {"class":"ah_item"}):
-            count = item.find("span", {"class":"ah_r"}).getText()
-            keyword = item.find("span", {"class":"ah_k"}).getText()
-            counts.append(count)
-            keywords.append(keyword)
-        
-        return counts, keywords
 
     def save_and_print(self):
         """collect current trending words and save or print"""
 
-        counts, keywords = self.get_current_trend()
-
+        counts, keywords = get_current_trend()
         if self.options.display_rank:
             for count, keyword in zip(counts, keywords):
                 pair = "{}.{}".format(count, keyword)
