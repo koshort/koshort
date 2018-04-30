@@ -7,7 +7,7 @@ import tweepy
 import urllib3
 import re
 import sys
-import colorama
+import colorama  # Colorama streaming verbosity.
 
 from koshort.constants import DATA_DIR, ALPHABET
 from koshort.stream import BaseStreamer
@@ -80,7 +80,7 @@ class CorpusListener(tweepy.StreamListener):
 
             if self.options.verbose:
                 for word in self.words:
-                    tweet = (colorama.Fore.BLUE+word).join(tweet.split(word))
+                    tweet = (colorama.Fore.CYAN+word).join(tweet.split(word))
                     tweet = (word+colorama.Fore.RESET).join(tweet.split(word))
                 print(word_count, tweet)
 
@@ -184,10 +184,5 @@ class TwitterStreamer(BaseStreamer):
 
         self.streamer = tweepy.Stream(auth=api.auth, listener=listener)
 
-    def run(self):
-        """Try to stream recursively when it fails due to protocol error. """
-        try:
-            self.streamer.filter(track=self.word_list, async=self.async)
-        except urllib3.exceptions.ProtocolError:
-            print("exception occured")
-            self.run()
+    def job(self):
+        self.streamer.filter(track=self.word_list, async=self.async)
