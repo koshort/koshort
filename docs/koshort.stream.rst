@@ -6,6 +6,8 @@ Submodules
 
 .. toctree::
 
+   koshort.stream.base
+   koshort.stream.misc
    koshort.stream.naver
    koshort.stream.twitter
 

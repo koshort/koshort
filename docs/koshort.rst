@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
 
     koshort.stream
+    koshort.tag
 
 Submodules
 ----------
@@ -16,6 +17,7 @@ Submodules
    koshort.constants
    koshort.data
    koshort.dictionary
+   koshort.threading
 
 Module contents
 ---------------
