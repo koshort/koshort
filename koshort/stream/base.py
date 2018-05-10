@@ -43,3 +43,6 @@ class BaseStreamer(object):
             self.stream(async=async)
         except RecursionError:
             return False
+        except KeyboardInterrupt:
+            print("User has interrupted.")
+            return False
