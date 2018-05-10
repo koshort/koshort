@@ -25,3 +25,4 @@ except pkg_resources.DistributionNotFound:
     __version__ = "dev"
 
 from koshort.data import clear, listdir
+from koshort import stream, tag  # Subpackage pre-loading

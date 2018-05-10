@@ -1,5 +1,6 @@
 """Utility functions for text processing."""
 import re
+import importlib
 
 
 def delete_links(string):

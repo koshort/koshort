@@ -112,7 +112,6 @@ data/*.txt
 *_dev.bat
 
 # not implemented
-koshort/tag
 mecab*
 goorm*
 data/*
