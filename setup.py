@@ -4,7 +4,7 @@ import os
 import sys
 from setuptools import find_packages, setup
 
-__version__ = '0.3.9.4'
+__version__ = '0.3.9.5'
 
 def requirements():
     def _openreq(reqfile):
@@ -46,6 +46,11 @@ setup(
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         ],
+    entry_points={
+        'console_scripts': [
+            'stream_twitter = koshort.__scripts__.tweeter:main'
+        ],
+    },
     license='GPL v3+',
     packages=find_packages(),
     install_requires=requirements())
