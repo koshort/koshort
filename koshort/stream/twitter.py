@@ -12,6 +12,7 @@ import colorama  # Colorama streaming verbosity.
 
 from koshort.constants import DATA_DIR, ALPHABET
 from koshort.stream import BaseStreamer
+from koshort.utils import delete_links, delete_mentions
 
 
 class CorpusListener(tweepy.StreamListener):
@@ -44,23 +45,15 @@ class CorpusListener(tweepy.StreamListener):
 
         colorama.init()
 
-    @staticmethod
-    def delete_links(tweet):
-        return re.sub(r'http\S+', '', tweet)
-    
-    @staticmethod
-    def delete_mentions(tweet):
-        return re.sub(r'@\S+', '', tweet)
-
     def on_status(self, status):
         tweet = status.text
 
         # Except potentially repetitive retweets
         def write_tweets_to_files(tweet):
             if self.options.remove_links:
-                tweet = self.delete_links(tweet)
+                tweet = delete_links(tweet)
             if self.options.remove_mentions:
-                tweet = self.delete_mentions(tweet)
+                tweet = delete_mentions(tweet)
 
             word_count = 0
 
