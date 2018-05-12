@@ -9,7 +9,7 @@ import glob
 import pytest
 
 
-@pytest.mark.parametrize("async", [(True), (False)])
+@pytest.mark.parametrize("is_async", [(True), (False)])
 def test_naver_streamer(async):
     naver = NaverStreamer()
     naver.options.n_limits = 1
