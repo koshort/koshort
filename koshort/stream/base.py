@@ -8,6 +8,18 @@ from koshort.threading import PropagatingThread
 import urllib3
 
 
+__all__ = ['KoshortStreamerError', 'BaseStreamer']
+
+
+class KoshortStreamerError(Exception):
+    def __init__(self, message, streamer):
+        self.message = message
+        self.streamer = streamer
+
+    def __str__(self):
+        return "%s has crashed. \n%s" % (self.streamer, self.message)
+
+
 class BaseStreamer(object):
     def __init__(self, is_async=True):
         self.is_async = is_async
