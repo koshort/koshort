@@ -58,8 +58,8 @@ Koshort is hardly inspired by the project KoNLPy, with similar philosphy. It is 
         ],
     entry_points={
         'console_scripts': [
-            'stream_twitter = koshort.__scripts__.tweeter:main',
-            'stream_naver = koshort.__scripts__.naver:main'
+            'stream_twitter = koshort.stream.twitter:main',
+            'stream_naver = koshort.stream.naver:main'
         ],
     },
     license='GPL v3+',

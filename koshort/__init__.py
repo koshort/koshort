@@ -4,7 +4,7 @@ Koshort is a Python package for Korean internet trends streaming and processingâ
 Koshort uses ./data as a default data directory to save crawled results.
 You can use following tricks when you use them.
 
-..code-block:: python
+.. code-block:: python
 
     >>> import koshort
     >>> koshort.clear()  # Delete every file in data directory.

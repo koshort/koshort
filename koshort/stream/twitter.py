@@ -192,3 +192,15 @@ class TwitterStreamer(BaseStreamer):
     def job(self):
         # FIXME: argument named "async" cannot be used in python3.7
         self.streamer.filter(track=self.word_list, async=self.is_async)
+
+
+def main():
+    app = TwitterStreamer(is_async=False)
+    app.options.verbose = True
+    app.show_options()
+    app.create_listener()
+    app.stream()
+
+
+if __name__ == '__main__':
+    main()
