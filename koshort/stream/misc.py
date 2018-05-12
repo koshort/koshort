@@ -51,7 +51,7 @@ class NavtterStreamer(BaseStreamer):
 
     def job(self):
         self.get_trend()
-        twitter = TwitterStreamer(word_list=self.trend, async=False)
+        twitter = TwitterStreamer(word_list=self.trend, is_async=False)
         twitter.options = self.twitter.options
         twitter.options.time_limits = self.options.interval
         twitter.create_listener()

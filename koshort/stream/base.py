@@ -30,9 +30,9 @@ class BaseStreamer(object):
         for attr, value in sorted(vars(self.options).items()):
             print("{} = {}".format(attr, value))
 
-    def stream(self, async=True):
+    def stream(self, is_async=True):
         try:
-            if async:
+            if is_async:
                     self._thread = PropagatingThread(target=self.job)
                     self._thread.start()
                     self._thread.join()
@@ -40,7 +40,7 @@ class BaseStreamer(object):
                 self.job()
         except urllib3.exceptions.ProtocolError:
             print("ProtocolError has raised but continue to stream.")
-            self.stream(async=async)
+            self.stream(is_async=is_async)
         except RecursionError:
             return False
         except KeyboardInterrupt:

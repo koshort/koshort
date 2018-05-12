@@ -107,7 +107,7 @@ class TwitterStreamer(BaseStreamer):
         async (bool): if true, apply threading in tweepy layer.
     """
 
-    def __init__(self, dirname=DATA_DIR, word_list=ALPHABET, async=False):
+    def __init__(self, dirname=DATA_DIR, word_list=ALPHABET, is_async=False):
         parser = self.get_parser()
         parser.add_argument(
             '--consumer_key', 
@@ -173,7 +173,7 @@ class TwitterStreamer(BaseStreamer):
         self.options, _ = parser.parse_known_args()
         self.dirname = dirname
         self.word_list = word_list
-        self.async = async
+        self.is_async = is_async
 
     def show_options(self):
         """Print out options available and predefined values."""
@@ -188,4 +188,5 @@ class TwitterStreamer(BaseStreamer):
         self.streamer = tweepy.Stream(auth=api.auth, listener=listener)
 
     def job(self):
-        self.streamer.filter(track=self.word_list, async=self.async)
+        # FIXME: argument named "async" cannot be used in python3.7
+        self.streamer.filter(track=self.word_list, async=self.is_async)
