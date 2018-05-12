@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2018, Koshort
+# This file is distributed under the same license as the Koshort package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Koshort 0.3.9.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-12 23:34+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.0\n"
+
+#: ../../koshort.rst:2
+msgid "koshort package"
+msgstr ""
+
+#: ../../koshort.rst:5
+msgid "Subpackages"
+msgstr ""
+
+#: ../../koshort.rst:13
+msgid "Submodules"
+msgstr ""
+
+#: ../../koshort.rst:24
+msgid "Module contents"
+msgstr ""
+
+#: koshort:1 of
+msgid ""
+"Koshort is a Python package for Korean internet trends streaming and "
+"processing… or maybe abbreviation of Korean domestic cat."
+msgstr ""
+
+#: koshort:3 of
+msgid ""
+"Koshort uses ./data as a default data directory to save crawled results. "
+"You can use following tricks when you use them."
+msgstr ""
+

@@ -1,0 +1,45 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2018, Koshort
+# This file is distributed under the same license as the Koshort package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Koshort 0.3.9.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-12 23:34+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.0\n"
+
+#: ../../streamer.rst:2
+msgid "Streamer"
+msgstr ""
+
+#: ../../streamer.rst:5
+msgid "Streaming Naver trends"
+msgstr ""
+
+#: ../../streamer.rst:7
+msgid ""
+"Naver is a most famous Korean search engine website and they provides the"
+" most searched keywords."
+msgstr ""
+
+#: ../../streamer.rst:24
+msgid "Streaming filtered tweets"
+msgstr ""
+
+#: ../../streamer.rst:26
+msgid ""
+"Twitter is one of the best source to find a Korean spoken-language and "
+"short messages. (where idea of the name Koshort came from) If you don't "
+"already have a twitter API access, please refer `here "
+"<https://apps.twitter.com/>`"
+msgstr ""
+

@@ -3,29 +3,34 @@
 # This file is distributed under the same license as the Koshort package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Koshort 0.3.9.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-12 23:34+0900\n"
-"PO-Revision-Date: 2018-05-13 00:32+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.0\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: kr\n"
-"X-Generator: Poedit 2.0.7\n"
 
 #: ../../index.rst:7
-msgid "코숏: 파이썬 한국어 온라인 트렌드 스트리밍"
+msgid "Koshort: Korean trends streaming in python"
 msgstr ""
 
 #: ../../index.rst:17
 msgid ""
-"코숏은 한국어 온라인 트렌드 스트리밍을 위한 파이썬 패키지... 아니면 한국 토종 "
-"고양이를 부르는 애칭입니다."
+"Koshort is a Python package for Korean internet trends streaming and "
+"processing... or maybe abbreviation of Korean domestic cat."
+msgstr ""
+
+#: ../../index.rst:19
+msgid ""
+"For step-by-step instructions, follow the :ref:`guide`. For specific "
+"descriptions of each module, go see the api documents."
 msgstr ""
 
 #: ../../index.rst:23
@@ -34,20 +39,20 @@ msgstr ""
 
 #: ../../index.rst:25
 msgid ""
-"Social network services and other internet communities are open and rich data "
-"source of human spoken language. But due to the issues of privacy and policy "
-"of each website, sharing a bunch of retrieved text data is normally "
-"prohibited. To solve the most major Natural Language Processing (NLP) problem "
-"under this circumstances, researchers had to rely on limited public datasets "
-"and data brought by their company. Otherwise they would implement their domain-"
-"specific crawler for each case."
+"Social network services and other internet communities are open and rich "
+"data source of human spoken language. But due to the issues of privacy "
+"and policy of each website, sharing a bunch of retrieved text data is "
+"normally prohibited. To solve the most major Natural Language Processing "
+"(NLP) problem under this circumstances, researchers had to rely on "
+"limited public datasets and data brought by their company. Otherwise they"
+" would implement their domain-specific crawler for each case."
 msgstr ""
 
 #: ../../index.rst:30
 msgid ""
-"Koshort is hardly inspired by the project `KoNLPy <http://konlpy.org>`_, with "
-"similar philosophy. It is not about recreating another crawler but to unify "
-"efforts around so that anyone can accelerate their projects."
+"Koshort is hardly inspired by the project `KoNLPy <http://konlpy.org>`_, "
+"with similar philosophy. It is not about recreating another crawler but "
+"to unify efforts around so that anyone can accelerate their projects."
 msgstr ""
 
 #: ../../index.rst:32
@@ -97,3 +102,4 @@ msgstr ""
 #: ../../index.rst:110
 msgid ":ref:`search`"
 msgstr ""
+
