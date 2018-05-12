@@ -31,7 +31,9 @@ class NavtterStreamer(BaseStreamer):
 
     """
 
-    def __init__(self):
+    def __init__(self, is_async=True):
+        self.is_async = is_async
+
         parser = self.get_parser()
         parser.add_argument(
             '-i', '--interval', 

@@ -107,7 +107,9 @@ class TwitterStreamer(BaseStreamer):
         async (bool): if true, apply threading in tweepy layer.
     """
 
-    def __init__(self, dirname=DATA_DIR, word_list=ALPHABET, is_async=False):
+    def __init__(self, dirname=DATA_DIR, word_list=ALPHABET, is_async=True):
+        self.is_async = is_async
+
         parser = self.get_parser()
         parser.add_argument(
             '--consumer_key', 
