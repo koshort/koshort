@@ -8,7 +8,6 @@ def clear():
     """clear the koshort output data directory
 
     .. code-block:: python
-
         >>> import koshort
         >>> koshort.clear()
 
@@ -23,7 +22,6 @@ def listdir():
     """list koshort default data directory.
 
     .. code-block:: python
-        
         >>> import koshort
         >>> koshort.listdir()
     
@@ -32,9 +30,34 @@ def listdir():
     print(os.listdir(DATA_DIR))
 
 
+class CorpusReader(object):
+    def __init__(self, extension='.txt'):
+        """CorpusReader reads corpuses in koshort data directory.
+            extension (str, optional): Defaults to '.txt'. extension of corpus to load.
 
-class CorpusLoader(object):
-    pass
+        .. code-block:: python
+            >>> from koshort.data import CorpusReader
+            >>> reader = CorpusReader()
+            >>> reader.read()
+            >>> reader.corpus
+            {...}
+            >>> reader.items = ["data/specific_corpus.txt"]
+            >>> reader.read()
+            >>> reader.corpus['specific_corpus.txt']
+            content of corpus
+        """
+
+        self.items = glob.glob(DATA_DIR+"*"+extension)
+        self.corpus = {}
+
+    def read(self):
+        """read method reads all files included 
+        in items attr and save it into corpus dictionary.
+        """
+
+        for filename in self.items:
+            reader = open(filename, mode='r+', encoding='utf-8')
+            self.corpus[os.path.basename(filename)] = reader.read()
 
 
 class StringWriter(object):
