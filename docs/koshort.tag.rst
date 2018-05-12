@@ -6,6 +6,7 @@ Submodules
 
 .. toctree::
 
+   koshort.tag.mecab
    koshort.tag.utils
 
 Module contents

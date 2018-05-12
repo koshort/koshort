@@ -8,6 +8,7 @@ def clear():
     """clear the koshort output data directory
 
     .. code-block:: python
+
         >>> import koshort
         >>> koshort.clear()
 
@@ -22,6 +23,7 @@ def listdir():
     """list koshort default data directory.
 
     .. code-block:: python
+
         >>> import koshort
         >>> koshort.listdir()
     
@@ -36,6 +38,7 @@ class CorpusReader(object):
             extension (str, optional): Defaults to '.txt'. extension of corpus to load.
 
         .. code-block:: python
+
             >>> from koshort.data import CorpusReader
             >>> reader = CorpusReader()
             >>> reader.read()

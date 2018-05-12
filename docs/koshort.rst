@@ -18,6 +18,7 @@ Submodules
    koshort.data
    koshort.dictionary
    koshort.threading
+   koshort.utils
 
 Module contents
 ---------------
