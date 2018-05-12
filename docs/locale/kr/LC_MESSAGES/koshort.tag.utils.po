@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2018, Koshort
+# This file is distributed under the same license as the Koshort package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Koshort 0.3.9.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-12 23:34+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.5.0\n"
+
+#: ../../koshort.tag.utils.rst:2
+msgid "koshort\\.tag\\.utils module"
+msgstr ""
+
+#: koshort.tag.utils.char2hex:1 of
+msgid "Converts a unicode character to hex. .. code-block:: python"
+msgstr ""
+
+#: koshort.tag.utils.concordance:1 of
+msgid ""
+"Find concordances of a phrase in a text. The farmost left numbers are "
+"indices, that indicate the location of the phrase in the text (by means "
+"of tokens). The following string, is part of the text surrounding the "
+"phrase for the given index. :param phrase: Phrase to search in the "
+"document. :param text: Target document. :param show: If ``True``, shows "
+"locations of the phrase on the console. .. code-block:: python"
+msgstr ""
+
+#: koshort.tag.utils.hex2char:1 of
+msgid "Converts a hex character to unicode. .. code-block:: python"
+msgstr ""
+
+#: koshort.tag.utils.load_txt:1 of
+msgid "Text file loader. To read a file, use ``read_txt()``instead."
+msgstr ""
+
+#: koshort.tag.utils.partition:1 of
+msgid ""
+"Partitions a list to several parts using indices. :param list_: The "
+"target list. :param indices: Indices to partition the target list."
+msgstr ""
+
+#: koshort.tag.utils.read_json:1 of
+msgid "JSON file reader."
+msgstr ""
+
+#: koshort.tag.utils.read_txt:1 of
+msgid "Text file reader."
+msgstr ""
+
+#: koshort.tag.utils.select:1 of
+msgid "Replaces some ambiguous punctuation marks to simpler ones."
+msgstr ""
+
