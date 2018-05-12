@@ -7,6 +7,7 @@
   <a href="https://travis-ci.org/koshort/koshort"><img src="https://travis-ci.org/koshort/koshort.svg?branch=master"/></a>
   <a href="https://koshort.readthedocs.io/"><img src="https://readthedocs.org/projects/koshort/badge/?version=latest" /></a>
   <a href="https://pypi.org/project/koshort/"><img src="https://badge.fury.io/py/koshort.svg" /></a>
+  <a href="https://discord.gg/eNFUnZt"><img src="https://img.shields.io/badge/chat-discord-ff69b4.svg" /></a>  
 </p>
 
 <p align="center">
