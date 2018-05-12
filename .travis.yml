@@ -1,9 +1,11 @@
 language: python
 
 python:
+    - "3.3"
+    - "3.4"
     - "3.5"
     - "3.6"
-    - "3.7-dev"
+    # - "3.7-dev"  -- 3.7 support is unavailable until tweepy issue get closed.
 
 before_install:
     - if [[ $TRAVIS_PYTHON_VERSION == 2* ]]; then pip install -r requirements.txt; fi
