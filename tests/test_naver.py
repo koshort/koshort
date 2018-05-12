@@ -11,12 +11,12 @@ import pytest
 
 @pytest.mark.parametrize("is_async", [(True), (False)])
 def test_naver_streamer(is_async):
-    naver = NaverStreamer()
+    naver = NaverStreamer(is_async=is_async)
     naver.options.n_limits = 1
     naver.options.display_rank = True
     naver.options.verbose = True
     naver.options.interval = 3
-    naver.stream(is_async=is_async)
+    naver.stream()
 
 
 def test_result_exists():
