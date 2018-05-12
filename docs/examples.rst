@@ -1,5 +1,5 @@
 Examples
 ========
 
-Below are a set of example tasks using koshort.
+Below is set of example tasks using koshort.
 

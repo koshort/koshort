@@ -4,7 +4,7 @@ import os
 import sys
 from setuptools import find_packages, setup
 
-__version__ = '0.3.9.9'
+__version__ = '0.4.0.0'
 
 def requirements():
     def _openreq(reqfile):
@@ -14,7 +14,7 @@ def requirements():
     if sys.version_info >= (3, ):
         return _openreq('requirements.txt')
     else:
-        raise Exception("Koshort does not support python2.* distribution.")  # This is final decision to deprecate 2.* if needed..
+        raise Exception("Koshort does not support python2.* distribution. consider using python3 which supports richer text formatting capability and code productivity.")
 
 setup(
     name='koshort',
@@ -22,11 +22,11 @@ setup(
     description='koshort is a Python package for Korean internet spoken language crawling and processing... or maybe Korean domestic cat.',
     long_description="""\
 Social network services and other internet communities are open and rich data source of human spoken language.
-But due to the issues of privacy and policy of the each websites, sharing bunch of retrieved text data is normally prohibited.
+But due to the issues of privacy and policy of each website, sharing a bunch of retrieved text data is normally prohibited.
 To solve the most major Natural Language Processing (NLP) problem under this circumstances, researchers had to rely on limited public datasets and data brought by their company.
-Otherwise they would implement their domain specific crawler for each cases.
+Otherwise they would implement their domain-specific crawler for each case.
 
-Koshort is hardly inspired by the project KoNLPy, with similar philosphy. It is not about recreating another crawler but to unify efforts around so that anyone can accelerate their projects.
+Koshort is hardly inspired by the project KoNLPy, with similar philosophy. It is not about recreating another crawler but to unify efforts around so that anyone can accelerate their projects.
         """,
     url='http://koshort.readthedocs.io',
     author='nyanye',

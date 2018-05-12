@@ -19,15 +19,15 @@ Koshort is a Python package for Korean internet trends streaming and processing.
 For step-by-step instructions, follow the :ref:`guide`.
 For specific descriptions of each module, go see the api documents.
 
-Lowering the barrier to the domain specific internet corpus
+Lowering the barrier to the domain-specific internet corpus
 -----------------------------------------------------------
 
 Social network services and other internet communities are open and rich data source of human spoken language.
-But due to the issues of privacy and policy of the each websites, sharing bunch of retrieved text data is normally prohibited.
+But due to the issues of privacy and policy of each website, sharing a bunch of retrieved text data is normally prohibited.
 To solve the most major Natural Language Processing (NLP) problem under this circumstances, researchers had to rely on limited public datasets and data brought by their company.
-Otherwise they would implement their domain specific crawler for each cases.
+Otherwise they would implement their domain-specific crawler for each case.
 
-Koshort is hardly inspired by the project `KoNLPy <http://konlpy.org>`_, with similar philosphy. It is not about recreating another crawler but to unify efforts around so that anyone can accelerate their projects.
+Koshort is hardly inspired by the project `KoNLPy <http://konlpy.org>`_, with similar philosophy. It is not about recreating another crawler but to unify efforts around so that anyone can accelerate their projects.
 
 Use out-of-box script
 
