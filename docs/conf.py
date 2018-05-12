@@ -20,6 +20,8 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+
+from datetime import datetime
 from koshort import __version__
 
 
@@ -50,8 +52,13 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Koshort'
-copyright = '2018, Nyanye'
+url = 'http://koshort.readthedocs.io'
+
 author = 'Nyanye'
+author_url = 'http://nyanye.com'
+
+curyear = datetime.today().year
+copyright = '2018-%s, %s' % (curyear, project)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -67,9 +74,7 @@ release = __version__
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'en'
-locale_dirs = ['locale/']
-gettext_compact = True
+# language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -90,6 +95,8 @@ todo_include_todos = True
 #
 # html_theme = 'alabaster'
 sys.path.append(os.path.abspath('_themes'))
+# Add any paths that contain custom themes here, relative to this directory.
+html_theme_path = ['_themes']
 html_theme = 'kr'
 
 
@@ -105,26 +112,14 @@ html_theme = 'kr'
 html_static_path = ['_static']
 html_style = 'konlpy.css'
 
-# Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = ['_themes']
-
-
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #
 # This is required for the alabaster theme
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 html_sidebars = {
-    '**': [
-        'github-banner.html',
-        'about.html',
-        'sidebar-header.html',
-        'navigation.html',
-        'sidebar-footer.html',
-        'relations.html',  # needs 'show_related': True theme option to display
-        'searchbox.html',
-        'donate.html',
-    ]
+    'index': ['github-banner.html', 'sidebar-header.html', 'localtoc.html', 'sidebar-footer.html', 'searchbox.html'],
+    '**'   : ['github-banner.html', 'localtoc.html', 'translations.html', 'relations.html', 'searchbox.html']
 }
 
 # -- Options for HTMLHelp output ------------------------------------------
@@ -167,8 +162,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'koshort', 'Koshort Documentation',
-     [author], 1)
+    (master_doc, 'koshort', 'Koshort Documentation', [author], 1)
 ]
 
 
