@@ -15,7 +15,7 @@ msgstr ""
 "Generated-By: Babel 2.5.0\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: kr\n"
+"Language: ko\n"
 "X-Generator: Poedit 2.0.7\n"
 
 #: ../../index.rst:7
