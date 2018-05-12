@@ -6,7 +6,7 @@ Streaming Naver trends
 
 Naver is a most famous Korean search engine website and they provides the most searched keywords.
 
-..code-block:: python
+.. code-block:: python
 
     >>> from koshort.stream import NaverStreamer
     >>> streamer = NaverStreamer()
@@ -26,7 +26,7 @@ Streaming filtered tweets
 Twitter is one of the best source to find a Korean spoken-language and short messages. (where idea of the name Koshort came from)
 If you don't already have a twitter API access, please refer `here <https://apps.twitter.com/>`
 
-..code-block:: python
+.. code-block:: python
 
     >>> import sys
     >>> import os
