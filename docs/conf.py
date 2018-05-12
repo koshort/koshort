@@ -105,6 +105,10 @@ html_theme = 'kr'
 html_static_path = ['_static']
 html_style = 'konlpy.css'
 
+# Add any paths that contain custom themes here, relative to this directory.
+html_theme_path = ['_themes']
+
+
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #
