@@ -11,6 +11,7 @@ You can use following tricks when you use them.
     >>> koshort.listdir()  # Show what's in data directory.
 
 """
+from future import absolute_import
 
 import pkg_resources
 
