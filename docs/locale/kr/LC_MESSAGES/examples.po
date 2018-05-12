@@ -17,18 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.5.0\n"
 
-#: ../../koshort.stream.misc.rst:2
-msgid "koshort\\.stream\\.misc module"
+#: ../../examples.rst:2
+msgid "Examples"
 msgstr ""
 
-#: koshort.stream.misc.NavtterStreamer:1 of
-msgid "Bases: :class:`koshort.stream.base.BaseStreamer`"
-msgstr ""
-
-#: koshort.stream.misc.NavtterStreamer:1 of
-msgid ""
-"Start streaming of twitter about naver's current top trending keywords. "
-"In order to use NavtterStreamer, you have to set-up both twitter and "
-"Navtter's options."
+#: ../../examples.rst:4
+msgid "Below is set of example tasks using koshort."
 msgstr ""
 
