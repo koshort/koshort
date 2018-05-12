@@ -4,7 +4,7 @@ import os
 import sys
 from setuptools import find_packages, setup
 
-__version__ = '0.3.9.8'
+__version__ = '0.3.9.9'
 
 def requirements():
     def _openreq(reqfile):
