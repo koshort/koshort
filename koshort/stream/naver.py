@@ -40,7 +40,6 @@ class NaverStreamer(BaseStreamer):
     """NaverStreamer helps to stream naver trending keywords asynchronously.
     
     ..code-block:: python
-
         >>> from koshort.stream import naver
         >>> streamer = naver.NaverStreamer()
         >>> streamer.stream()
