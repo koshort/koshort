@@ -1,11 +1,20 @@
-# koshort
-![Build Status](https://travis-ci.org/koshort/koshort.svg?branch=master)
-![Documentation Status](https://readthedocs.org/projects/koshort/badge/?version=latest)
-![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)
-[![PyPI version](https://badge.fury.io/py/koshort.svg)](https://badge.fury.io/py/koshort)
+<br><br>
 
-한국어 인터넷 트렌드 스트리밍과 처리를 위하여 만들어진 파이썬 패키지 코숏.  
-koshort is a Python package for Korean internet trends streaming and processing... or maybe Korean domestic cat.
+<h1 align="center">Koshort</h1>
+
+<p align="center">
+  <a href="/LICENSE"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg"/></a>
+  <a href="https://travis-ci.org/koshort/koshort"><img src="https://travis-ci.org/koshort/koshort.svg?branch=master"/></a>
+  <a href="https://koshort.readthedocs.io/"><img src="https://readthedocs.org/projects/koshort/badge/?version=latest" /></a>
+  <a href="https://pypi.org/project/koshort/"><img src="https://badge.fury.io/py/koshort" /></a>
+</p>
+
+<p align="center">
+    한국어 인터넷 트렌드 스트리밍과 처리를 위하여 만들어진 파이썬 패키지 코숏.<br>
+    koshort is a Python package for Korean internet trends streaming and processing... or maybe Korean domestic cat :cat:.
+</p>
+
+<br><br><br>
 
 * English Documentation (In progress..): [http://koshort.readthedocs.io/](http://koshort.readthedocs.io/)
 * 한국어 문서 (준비중..): [http://koshort.readthedocs.io/](http://koshort.readthedocs.io/)
