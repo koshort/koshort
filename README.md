@@ -10,6 +10,21 @@ koshort is a Python package for Korean internet trends streaming and processing.
 * English Documentation (In progress..): [http://koshort.readthedocs.io/](http://koshort.readthedocs.io/)
 * 한국어 문서 (준비중..): [http://koshort.readthedocs.io/](http://koshort.readthedocs.io/)
 
+## Installation
+The easiest way to install the latest version is by using pip/easy_install to pull it from PyPI:
+
+```bash
+pip install koshort
+```
+
+You may also use Git to clone the repository from GitHub and install it manually:
+
+```bash
+git clone https://github.com/koshort/koshort.git
+cd koshort
+python setup.py install
+```
+
 Python 3.3, 3.4, 3.5 & 3.6 are supported.  
 3.7 compatibility soon will be available.
 
