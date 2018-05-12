@@ -1,0 +1,133 @@
+@import url(flasky.css);
+@font-face {
+  font-family: 'Nanum Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nanum Myeongjo';
+  font-style: normal;
+  font-weight: 600;
+  src: url(//fonts.gstatic.com/ea/nanummyeongjo/v4/NanumMyeongjo-Bold.eot);
+  src: url(//fonts.gstatic.com/ea/nanummyeongjo/v4/NanumMyeongjo-Bold.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/nanummyeongjo/v4/NanumMyeongjo-Bold.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/nanummyeongjo/v4/NanumMyeongjo-Bold.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/nanummyeongjo/v4/NanumMyeongjo-Bold.ttf) format('truetype');
+}
+
+body {
+    font-family: 'PT Sans', 'Helvetica Neue', 'Arial', 'Nanum Gothic', sans-serif;
+}
+
+div.body h1,
+div.body h2,
+div.body h3,
+div.body h4,
+div.body h5 {
+    font-family: 'Garamond', 'Georgia', 'Nanum Myeongjo', serif;
+}
+
+a.reference.image-reference {
+    border-bottom: none;
+    display: inline-block;
+}
+
+a.reference.image-reference:hover {
+    border-bottom: none;
+}
+
+div.sphinxsidebar #searchbox input[type="submit"] {
+    width: inherit;
+}
+
+table.docutils {
+    margin: 15px 0;
+}
+
+table.footnote {
+    margin: 10px 0 -11px;
+}
+
+table.footnote td.label {
+    width: 25px;
+}
+
+.example {
+    border: 1px solid #eee;
+    display: inline-block;
+    height: 200px;
+    margin: 5px;
+    margin-right: 10px;
+    overflow: hidden;
+    padding: 5px;
+    text-align: center;
+    width: 300px;
+}
+
+.example p {
+    margin: 0;
+}
+
+.example img {
+    max-height: 100%;
+}
+
+.first {
+    margin: 0;
+}
+
+.github {
+    width: 150px;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.language {
+    background-color: rgba(186,96,187,0.4);
+    border: 1px solid rgb(186,96,187);
+    font-size: 70%;
+    margin: 0 2px;
+    padding: 1px 3px;
+}
+
+.language:hover {
+    background-color: rgba(186,96,187,0.7);
+}
+
+.license {
+    background-color: rgba(86,196,187,0.4);
+    border: 1px solid rgb(86,196,187);
+    font-size: 70%;
+    margin: 0 2px;
+    padding: 1px 3px;
+}
+
+.license:hover {
+    background-color: rgba(86,196,187,0.7);
+}
+
+#disqus_thread {
+    margin-top: 50px;
+}
+
+#related-pages.affix-top {
+    position: static;
+    margin-top: 0px;
+    width: 200px;
+}
+
+#related-pages.affix {
+    position: fixed;
+    top: 0px;
+    width: 200px;
+}
+
+.affix, .affix-top {
+   position: static;
+}
