@@ -29,8 +29,41 @@ Otherwise they would implement their domain specific crawler for each cases.
 
 Koshort is hardly inspired by the project `KoNLPy <http://konlpy.org>`_, with similar philosphy. It is not about recreating another crawler but to unify efforts around so that anyone can accelerate their projects.
 
+Use out-of-box script
 
-.. sourcecode:: python
+.. code-block:: python
+
+    > stream_naver
+    display_rank = False
+    filename = trends.txt
+    interval = 60
+    n_limits = 10
+    verbose = True
+    시크릿 마더
+    무법변호사
+    신아영
+    미얀마
+    로드fc
+    소진
+    위너
+    불후의명곡
+    그것이 알고싶다
+    짠내투어
+    아는형님
+    로또
+    로또806회
+    msi
+    전지적 참견 시점
+    김재훈
+    아이돌룸
+    토익
+    아오르꺼러
+    같이 살래요
+
+
+Use koshort API
+
+.. code-block:: python
 
     >>> from koshort.stream import NaverStreamer
     >>> streamer = NaverStreamer()
