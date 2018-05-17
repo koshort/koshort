@@ -82,6 +82,27 @@ Koshort is Open Source Software, and is released under the license below:
 
 - `GPL v3 or above <http://gnu.org/licenses/gpl.html>`_
 
+
+Contribute
+----------
+
+Koshort is just another newly created library.
+It can continuously evolve and we need your help!
+
+Found a bug? Do you have a good idea for improving koshort?
+Visit `Koshort GitHub page <https://github.com/koshort/koshort>`_
+and `suggest an idea <https://github.com/koshort/koshort/issues>`_
+or `make a pull request <https://github.com/koshort/koshort/pulls>`_.
+
+You are also welcome to join
+our `discord <https://discord.gg/eNFUnZt>`_
+
+Please note that
+*asking questions through these channels is also a great contribution*,
+Because it gives the community feedback as well as ideas.
+Please don't hesitate to ask.
+
+
 User guide
 ----------
 
