@@ -119,7 +119,7 @@ html_style = 'konlpy.css'
 # refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 html_sidebars = {
     'index': ['github-banner.html', 'sidebar-header.html', 'localtoc.html', 'translations.html', 'sidebar-footer.html', 'searchbox.html'],
-    '**'   : ['github-banner.html', 'localtoc.html', 'relations.html', 'searchbox.html']
+    '**'   : ['github-banner.html', 'sidebar-header.html', 'localtoc.html', 'relations.html', 'searchbox.html']
 }
 
 # -- Options for HTMLHelp output ------------------------------------------
