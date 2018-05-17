@@ -16,8 +16,8 @@ Koshort: Korean trends streaming in python
 
 Koshort is a Python package for Korean internet trends streaming and processing... or maybe abbreviation of Korean domestic cat.
 
-For step-by-step instructions, follow the :ref:`guide`.
-For specific descriptions of each module, go see the api documents.
+For step-by-step instructions, follow the :doc:`tutorial <streamer>` and explore :doc:`examples <examples>`.
+For specific descriptions of each module, go see the :ref:`api` documents.
 
 Lowering the barrier to the domain-specific internet corpus
 -----------------------------------------------------------
