@@ -114,22 +114,18 @@ class TwitterStreamer(BaseStreamer):
         parser.add_argument(
             '--consumer_key', 
             help='consumer key',
-            required=True
         )
         parser.add_argument(
             '--consumer_secret', 
             help='consumer secret',
-            required=True
         )
         parser.add_argument(
             '--access_token', 
             help='access token',
-            required=True
         )
         parser.add_argument(
             '--access_token_secret', 
             help='access token secret',
-            required=True
         )
         parser.add_argument(
             '--filter_retweets', 
