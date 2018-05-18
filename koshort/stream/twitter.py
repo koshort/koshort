@@ -182,12 +182,6 @@ class TwitterStreamer(BaseStreamer):
         self.word_list = word_list
         self.is_async = is_async
 
-    def show_options(self):
-        """Print out options available and predefined values."""
-
-        for attr, value in sorted(vars(self.options).items()):
-            print("{} = {}".format(attr, value))
-
     def create_listener(self):
         listener = CorpusListener(self.options, self.dirname, self.word_list)
         api = listener.api
