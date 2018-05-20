@@ -98,7 +98,9 @@ sys.path.append(os.path.abspath('_themes'))
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
 html_theme = 'kr'
-
+# The name of an image file (relative to this directory) to place at the top
+# of the sidebar.
+html_logo = '_static/koshort.png'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
