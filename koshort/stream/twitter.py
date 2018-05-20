@@ -114,22 +114,18 @@ class TwitterStreamer(BaseStreamer):
         parser.add_argument(
             '--consumer_key', 
             help='consumer key',
-            required=True
         )
         parser.add_argument(
             '--consumer_secret', 
             help='consumer secret',
-            required=True
         )
         parser.add_argument(
             '--access_token', 
             help='access token',
-            required=True
         )
         parser.add_argument(
             '--access_token_secret', 
             help='access token secret',
-            required=True
         )
         parser.add_argument(
             '--filter_retweets', 
@@ -183,12 +179,6 @@ class TwitterStreamer(BaseStreamer):
         self.is_async = is_async
 
         self.streamer = None
-
-    def show_options(self):
-        """Print out options available and predefined values."""
-
-        for attr, value in sorted(vars(self.options).items()):
-            print("{} = {}".format(attr, value))
 
     def create_listener(self):
         listener = CorpusListener(self.options, self.dirname, self.word_list)
