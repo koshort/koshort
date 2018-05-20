@@ -4,7 +4,7 @@ import os
 import sys
 from setuptools import find_packages, setup
 
-__version__ = '0.4.0.0'
+__version__ = '0.4.1.0'
 
 def requirements():
     def _openreq(reqfile):
@@ -60,6 +60,7 @@ Koshort is hardly inspired by the project KoNLPy, with similar philosophy. It is
         'console_scripts': [
             'stream_twitter = koshort.stream.twitter:main',
             'stream_naver = koshort.stream.naver:main'
+            'stream_dcinside = koshort.stream.dcinside:main'
         ],
     },
     license='GPL v3+',
