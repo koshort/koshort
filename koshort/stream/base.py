@@ -21,6 +21,14 @@ class KoshortStreamerError(Exception):
 
 
 class BaseStreamer(object):
+    """BaseStreamer class contains:
+
+    Methods:
+        get_parser: returns initial argument parser
+        show_options: show options that can be used or parsed
+        stream: try asynchronous streaming using job method
+    """
+
     def __init__(self, is_async=True):
         self.is_async = is_async
 
