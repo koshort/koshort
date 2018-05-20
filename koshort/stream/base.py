@@ -56,9 +56,9 @@ class BaseStreamer(object):
     def stream(self):
         try:
             if self.is_async:
-                    self._thread = PropagatingThread(target=self.job)
-                    self._thread.start()
-                    self._thread.join()
+                self._thread = PropagatingThread(target=self.job)
+                self._thread.start()
+                self._thread.join()
             else:
                 self.job()
         except urllib3.exceptions.ProtocolError:
