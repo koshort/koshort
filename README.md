@@ -18,7 +18,7 @@
 <br><br><br>
 
 * English Documentation: [http://koshort.readthedocs.io/](http://koshort.readthedocs.io/)
-* 한국어 문서: [http://koshort.readthedocs.io/ko/latest/](http://koshort.readthedocs.io/)
+* 한국어 문서: [http://koshort.readthedocs.io/ko/latest/](http://koshort.readthedocs.io/ko/latest)
 
 ## Installation
 The easiest way to install the latest version is by using pip/easy_install to pull it from PyPI:
