@@ -182,6 +182,8 @@ class TwitterStreamer(BaseStreamer):
         self.word_list = word_list
         self.is_async = is_async
 
+        self.streamer = None
+
     def show_options(self):
         """Print out options available and predefined values."""
 
