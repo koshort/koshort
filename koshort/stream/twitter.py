@@ -173,6 +173,17 @@ class TwitterStreamer(BaseStreamer):
         )
 
         self.options, _ = parser.parse_known_args()
+        # lazy requirement checking since argparse's required option blocks initialization.
+        requirements = [self.options.consumer_key, self.options.consumer_secret,
+                        self.options.access_token, self.options.access_token_secret]
+
+        flag = None
+        for requirement in requirements:
+            if not requirement:
+                flag = 1
+
+        if flag is not None:
+            print("You have to provide valid consumer key, consumer_secret, access_token, access_token_secret.")
 
         self.dirname = dirname
         self.word_list = word_list
