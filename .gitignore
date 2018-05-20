@@ -47,7 +47,7 @@ coverage.xml
 .hypothesis/
 
 # Translations
-*.mo
+# *.mo  # ReadTheDocs seems to have an issue with compiling utf-8 docs.
 *.pot
 
 # Django stuff:
@@ -115,3 +115,6 @@ data/*.txt
 mecab*
 goorm*
 data/*
+
+# IDE environment
+.vscode
