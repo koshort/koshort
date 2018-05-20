@@ -171,8 +171,14 @@ class TwitterStreamer(BaseStreamer):
             default=1000000,
             type=int
         )
+        parser.add_argument(
+            '--keyword_file',
+            help='file that defines a keywords line by line',
+            type=str
+        )
 
         self.options, _ = parser.parse_known_args()
+
         # lazy requirement checking since argparse's required option blocks initialization.
         requirements = [self.options.consumer_key, self.options.consumer_secret,
                         self.options.access_token, self.options.access_token_secret]
@@ -185,10 +191,19 @@ class TwitterStreamer(BaseStreamer):
         if flag is not None:
             print("You have to provide valid consumer key, consumer_secret, access_token, access_token_secret.")
 
+        # Parse wordlist from custom argument
         self.dirname = dirname
-        self.word_list = word_list
-        self.is_async = is_async
+        if self.options.keyword_file is not None:
+            try:
+                reader = open(self.options.keyword_file, mode='r+', encoding='utf-8')
+            except UnicodeDecodeError:
+                reader = open(self.options.keyword_file, mode='r+', encoding='cp949')
+            self.word_list = reader.readlines()
 
+        else:
+            self.word_list = word_list
+
+        self.is_async = is_async
         self.streamer = None
 
     def create_listener(self):
