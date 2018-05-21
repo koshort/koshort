@@ -1,9 +1,13 @@
 from datetime import datetime
 from bs4 import BeautifulSoup, SoupStrainer
 from koshort.stream import BaseStreamer
+from koshort.data import StringWriter
 
 import requests
 import time
+import colorama
+
+from colorama import Style, Fore
 from pprint import pprint
 
 
@@ -62,14 +66,22 @@ class DCInsideStreamer(BaseStreamer):
             default=0.5,
             type=float
         )
-        # TODO: Add include_metadata
+        parser.add_argument(
+            '--metadata_to_dict',
+            help='return metadata into dictionary type',
+            action='store_true',
+        )
+        parser.add_argument(
+            '--filename', 
+            help="filename to be saved.", 
+            default="gallery.txt"
+        )
 
         self.options, _ = parser.parse_known_args()
         self._session = requests.Session()
         self._markup = markup
         self._view_url = 'http://gall.dcinside.com/board/view'
         self._current_post_id = self.options.init_post_id
-        self._done = False
     
         self._strainer = SoupStrainer('div', attrs={'class': [
             're_gall_top_1',    # 제목, 글쓴이, 작성시각
@@ -88,8 +100,15 @@ class DCInsideStreamer(BaseStreamer):
             time.sleep(self.options.interval)
             r = self._session.get('%s/?id=%s&no=%d' % (self._view_url, gallery_id, post_no),
                                 headers=header, timeout=self.options.timeout)
+                
+            try:
+                post = self.parse_post(r.text, 'lxml', self._strainer)
+            except AttributeError:
+                return None
 
-            post = self.parse_post(r.text, 'lxml', self._strainer)
+            if not isinstance(post, dict):
+                return None
+
             post['gallery_id'] = gallery_id
             post['post_no'] = post_no
             post['crawled_at'] = datetime.now().isoformat()
@@ -125,17 +144,28 @@ class DCInsideStreamer(BaseStreamer):
         return comments
 
     def job(self):
-        while not self._done:
-            if self.options.final_post_id > self._current_post_id:
-                result = self.get_post(self.options.gallery_id, self._current_post_id)
+        colorama.init()
+        writer = StringWriter(self.options.filename)
+
+        def summary(result):
+            if not self.options.metadata_to_dict:
+                if self.options.verbose:
+                    print(Fore.CYAN+result['title']+Fore.RESET)
+                    print(Fore.CYAN+Style.DIM+result['written_at']+Style.RESET_ALL+Fore.RESET)
+                    print(result['body'])
+                writer.write("@title:"+result['title'])
+                writer.write("@written_at:"+result['written_at'])
+                writer.write("@body:"+result['body'])
+            else:
                 if self.options.verbose:
                     pprint(result)
-            else:
-                self._done = True
+                writer.write(result)
 
-            if self.options.forever:
-                self._done = False
-            
+        while (self.options.final_post_id > self._current_post_id) | self.options.forever:
+            result = self.get_post(self.options.gallery_id, self._current_post_id)
+            if result is not None:
+                summary(result)
+
             self._current_post_id += 1
 
     @staticmethod
@@ -146,7 +176,7 @@ class DCInsideStreamer(BaseStreamer):
             soup = BeautifulSoup(markup, parser)
 
             if '/error/deleted/' in str(soup):
-                return {'deleted': True}
+                return None
             elif '해당 갤러리는 존재하지 않습니다' in str(soup):
                 raise NoSuchGalleryError
             else:
@@ -165,7 +195,7 @@ class DCInsideStreamer(BaseStreamer):
         view_up = int(soup.find(id='recommend_view_up').string)
         view_dn = int(soup.find(id='recommend_view_down').string)
         comment_cnt = int(soup.find(id='re_count').string)
-        body = str(soup.find('div', attrs={'class': 's_write'}).find('td'))
+        body = soup.find('div', attrs={'class': 's_write'}).find('td').getText()
 
         post = {
             'user_id': user_id,
