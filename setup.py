@@ -59,8 +59,8 @@ Koshort is hardly inspired by the project KoNLPy, with similar philosophy. It is
     entry_points={
         'console_scripts': [
             'stream_twitter = koshort.stream.twitter:main',
-            'stream_naver = koshort.stream.naver:main'
-            'stream_dcinside = koshort.stream.dcinside:main'
+            'stream_naver = koshort.stream.naver:main',
+            'stream_dcinside = koshort.stream.dcinside:main',
         ],
     },
     license='GPL v3+',
