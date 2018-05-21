@@ -3,11 +3,8 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
 
-import tweepy
-import urllib3
-import re
-import sys
 import time
+import tweepy
 import colorama  # Colorama streaming verbosity.
 
 from koshort.constants import DATA_DIR, ALPHABET
