@@ -81,6 +81,7 @@ class DCInsideStreamer(BaseStreamer):
         self._session = requests.Session()
         self._markup = markup
         self._view_url = 'http://gall.dcinside.com/board/view'
+        self._comment_view_url = 'http://gall.dcinside.com/board/view'
         self._current_post_id = self.options.init_post_id
     
         self._strainer = SoupStrainer('div', attrs={'class': [
@@ -133,7 +134,7 @@ class DCInsideStreamer(BaseStreamer):
         for i in range(comment_page_cnt):
             data['comment_page'] = i + 1
 
-            r = self._session.post('http://gall.dcinside.com/comment/view', headers=headers, data=data)
+            r = self._session.post(self._comment_view_url, headers=headers, data=data)
             batch = self.parse_comments(r.text)
 
             if not batch:
