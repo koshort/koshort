@@ -29,19 +29,37 @@ class Request(object):
         self.header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'}
     
-    async def get(self, url, process=_process):
+    async def get(self, url, process=_process, connector_limit=100):
         """Asynchronous get request and custom postprocessing
         
         Args:
             url (str): url to request get
             process (callable, optional): Defaults to _process. 
                 pass a custom processing function after getting response if needed.
+            connector_limit (int, optional): Defaults ot 100. Custom TCP connector limit
         """
         assert isinstance(url, str)
 
-        connector = aiohttp.TCPConnector(limit=16)
+        connector = aiohttp.TCPConnector(limit=connector_limit)
         async with aiohttp.ClientSession(connector=connector) as session:
             async with session.get(url, headers=self.header) as response:
+                return process(response)
+
+    async def post(self, url, process=_process, connector_limit=100, data=None):
+        """Asynchronous post request and custom postprocessing
+        
+        Args:
+            url (str): url to request get
+            process (callable, optional): Defaults to _process. 
+                pass a custom processing function after getting response if needed.
+            connector_limit (int, optional): Defaults ot 100. Custom TCP connector limit
+            data (dict, optional): data to attach on post request
+        """
+        assert isinstance(url, str)
+
+        connector = aiohttp.TCPConnector(limit=connector_limit)
+        async with aiohttp.ClientSession(connector=connector) as session:
+            async with session.post(url, headers=self.header, data=data) as response:
                 return process(response)
 
     def run(self, tasks):
