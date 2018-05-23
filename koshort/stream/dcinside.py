@@ -90,20 +90,46 @@ class DCInsideStreamer(BaseStreamer):
             'gallery_re_title', # 댓글
             's_write',          # 본문
         ]})
+        # Custom header is required in order to request.
+        self.header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'}
+
+    def request_post(self, gallery_id,  post_no):
+        """Request dcinside post
+        
+        Args:
+            gallery_id (str): predefined id of gallery
+            post_no (int): integer of post number
+        
+        Returns:
+            response: response of requests
+        """
+
+        response = self._session.get('%s/?id=%s&no=%d' % (self._view_url, gallery_id, post_no),
+                                     headers=self.header, timeout=self.options.timeout)
+        return response
+
+    def request_comment(self, headers=None, data=None):
+        """Request dcinside comment
+
+        Args:
+            headers (dict): request headers
+            data (dict): data to be used
+        
+        Returns:
+            response: response of requests
+        """
+        response = self._session.post(self._comment_view_url, headers=headers, data=data)
+        return response
 
     def get_post(self, gallery_id, post_no):
         try:
-            # Custom header is required in order to request.
-            header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'}
-
-            # Site's anti-bot policy may block crawling
+            # Site's anti-bot policy may block crawling & you can consider gentle crawling
             time.sleep(self.options.interval)
-            r = self._session.get('%s/?id=%s&no=%d' % (self._view_url, gallery_id, post_no),
-                                headers=header, timeout=self.options.timeout)
+            response = self.request_post(gallery_id, post_no)
                 
             try:
-                post = self.parse_post(r.text, 'lxml', self._strainer)
+                post = self.parse_post(response.text, 'lxml', self._strainer)
             except AttributeError:
                 return None
 
@@ -133,9 +159,8 @@ class DCInsideStreamer(BaseStreamer):
 
         for i in range(comment_page_cnt):
             data['comment_page'] = i + 1
-
-            r = self._session.post(self._comment_view_url, headers=headers, data=data)
-            batch = self.parse_comments(r.text)
+            response = self.request_comment(headers, data)
+            batch = self.parse_comments(response.text)
 
             if not batch:
                 break
