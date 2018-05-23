@@ -1,4 +1,4 @@
-"""Experimental implemntation of asynchronous request using asyncio"""
+"""Experimental implementation of asynchronous request using asyncio"""
 
 import sys
 
@@ -7,28 +7,53 @@ if not (sys.version_info[0] >= 3) & (sys.version_info[1] >= 5):
 
 import asyncio
 import aiohttp
+import collections
+import warnings
 
 
-class AsyncStreamer(object):
-    """Asynchronous request is much much faster way to do everything"""
+def _process(response):
+    """Dummy post-processing after http request"""
+    pass
 
-    def __init__(self, process, url, init_point, end_point):
+
+class Request(object):
+    def __init__(self, process=_process):
+        """Asynchronous request API
+        
+        Args:
+            process (callable, optional): Defaults to _process.
+                pass a custom processing function after getting response if needed.
+        """
+
         assert callable(process)
-        self.process = process
-        self.url = url
-        self.init_point = init_point
-        self.end_point = end_point
         self.header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'}
+    
+    async def get(self, url, process=_process):
+        """Asynchronous get request and custom postprocessing
+        
+        Args:
+            url (str): url to request get
+            process (callable, optional): Defaults to _process. 
+                pass a custom processing function after getting response if needed.
+        """
+        assert isinstance(url, str)
 
-    async def task(self, i, process):
         connector = aiohttp.TCPConnector(limit=16)
         async with aiohttp.ClientSession(connector=connector) as session:
-            async with session.get(self.url+i, headers=self.header) as response:
-                process(response)
+            async with session.get(url, headers=self.header) as response:
+                return process(response)
 
-    def stream(self):
-        tasks = [self.task(idx, self.process) for idx in range(self.init_point, self.end_point)]
+    def run(self, tasks):
+        """Run asynchronous event loop until complete
+        
+        Args:
+            tasks (collections.Iterable): Iterable tasks to be executed
+        """
+
+        if not isinstance(tasks, collections.Iterable):
+            tasks = [tasks]
+
         loop = asyncio.get_event_loop()
         try:
             loop.run_until_complete(asyncio.wait(tasks))
