@@ -1,3 +1,5 @@
+"""High-level streaming interfaces for various websites and services"""
+
 from __future__ import absolute_import
 
 from koshort.stream.base import BaseStreamer, KoshortStreamerError
