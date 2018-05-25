@@ -63,6 +63,7 @@ Koshort is hardly inspired by the project KoNLPy, with similar philosophy. It is
         'console_scripts': [
             'stream_twitter = koshort.stream.twitter:main',
             'stream_naver = koshort.stream.naver:main',
+            'stream_daum = koshort.stream.daum:main',
             'stream_dcinside = koshort.stream.dcinside:main',
         ],
     },
