@@ -4,7 +4,7 @@ from koshort.stream.naver import get_current_trend
 
 
 class NavtterStreamer(BaseStreamer):
-    """Start streaming of twitter about naver's current top trending keywords. 
+    """Start streaming of twitter about naver's current top trending keywords.
     In order to use NavtterStreamer, you have to set-up both twitter and Navtter's options.
 
     .. code-block:: python

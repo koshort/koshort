@@ -34,7 +34,7 @@ class Request(object):
 
         Args:
             url (str): url to request get
-            process (callable, optional): Defaults to _process. 
+            process (callable, optional): Defaults to _process.
                 pass a custom processing function after getting response if needed.
             connector_limit (int, optional): Defaults ot 100. Custom TCP connector limit
         """
@@ -50,7 +50,7 @@ class Request(object):
 
         Args:
             url (str): url to request get
-            process (callable, optional): Defaults to _process. 
+            process (callable, optional): Defaults to _process.
                 pass a custom processing function after getting response if needed.
             connector_limit (int, optional): Defaults ot 100. Custom TCP connector limit
             data (dict, optional): data to attach on post request

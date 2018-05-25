@@ -54,7 +54,7 @@ class CorpusReader(object):
         self.corpus = {}
 
     def read(self):
-        """read method reads all files included 
+        """read method reads all files included
         in items attr and save it into corpus dictionary.
         """
 
