@@ -41,8 +41,8 @@ class BaseStreamer(object):
 
         parser = ArgumentParser()
         parser.add_argument(
-            '-v', '--verbose', 
-            help="increase verbosity", 
+            '-v', '--verbose',
+            help="increase verbosity",
             action="store_true"
         )
         return parser

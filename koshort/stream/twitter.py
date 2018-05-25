@@ -15,14 +15,14 @@ from koshort.utils import delete_links, delete_mentions
 class CorpusListener(tweepy.StreamListener):
     def __init__(self, options, dirname, word_list):
         """CorpusListener is a tweepy listener to listen on filtered list of words.
-        
+
         Args:
             options (object): argparser argument namespace
             dirname (str): string of directory
             word_list (list): list of words
         """
 
-        # WARNING: This underlining keys and tokens 
+        # WARNING: This underlining keys and tokens
         # should not be shared or uploaded on any public code repository!
         self.consumer_key = options.consumer_key
         self.consumer_secret = options.consumer_secret
@@ -64,7 +64,7 @@ class CorpusListener(tweepy.StreamListener):
                 self.options.output_prefix,
                 word_count,
                 self.options.output_extension
-                )
+            )
 
             n_word_file = open(filename, 'a', encoding='utf-8')
             n_word_file.write(tweet)
@@ -72,8 +72,8 @@ class CorpusListener(tweepy.StreamListener):
 
             if self.options.verbose:
                 for word in self.words:
-                    tweet = (colorama.Fore.CYAN+word).join(tweet.split(word))
-                    tweet = (word+colorama.Fore.RESET).join(tweet.split(word))
+                    tweet = (colorama.Fore.CYAN + word).join(tweet.split(word))
+                    tweet = (word + colorama.Fore.RESET).join(tweet.split(word))
                 print(word_count, tweet)
 
         if self.options.filter_retweets:
@@ -81,7 +81,7 @@ class CorpusListener(tweepy.StreamListener):
                 write_tweets_to_files(tweet)
                 self.limit += 1
                 if (self.limit == self.options.tweet_limits) | (
-                    (time.time() - self.init_time) >= self.options.time_limits):
+                        (time.time() - self.init_time) >= self.options.time_limits):
                     return False
 
         else:
@@ -109,61 +109,61 @@ class TwitterStreamer(BaseStreamer):
 
         parser = self.get_parser()
         parser.add_argument(
-            '--consumer_key', 
+            '--consumer_key',
             help='consumer key',
         )
         parser.add_argument(
-            '--consumer_secret', 
+            '--consumer_secret',
             help='consumer secret',
         )
         parser.add_argument(
-            '--access_token', 
+            '--access_token',
             help='access token',
         )
         parser.add_argument(
-            '--access_token_secret', 
+            '--access_token_secret',
             help='access token secret',
         )
         parser.add_argument(
-            '--filter_retweets', 
+            '--filter_retweets',
             help='do not save potentially repetitive retweets',
             action="store_true",
         )
         parser.add_argument(
-            '--remove_links', 
+            '--remove_links',
             help='remove links included into each tweet',
             action="store_true",
         )
         parser.add_argument(
-            '--remove_mentions', 
+            '--remove_mentions',
             help='remove mentions included into each tweet',
             action="store_true",
         )
         parser.add_argument(
-            '--output_prefix', 
+            '--output_prefix',
             help='prefix of the output file',
             default='tweet',
             type=str
         )
         parser.add_argument(
-            '--output_as_onefile', 
+            '--output_as_onefile',
             help='save output as onefile',
             action="store_true",
         )
         parser.add_argument(
-            '--output_extension', 
+            '--output_extension',
             help='extension of the output file',
             default='txt',
             type=str
         )
         parser.add_argument(
-            '--tweet_limits', 
+            '--tweet_limits',
             help='stop when this amount of tweets are collected',
             default=1000000,
             type=int
         )
         parser.add_argument(
-            '--time_limits', 
+            '--time_limits',
             help='stop when n secs elapsed',
             default=1000000,
             type=int

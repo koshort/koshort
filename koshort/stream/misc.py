@@ -36,13 +36,13 @@ class NavtterStreamer(BaseStreamer):
 
         parser = self.get_parser()
         parser.add_argument(
-            '-i', '--interval', 
-            help="streaming interval(secs)", 
+            '-i', '--interval',
+            help="streaming interval(secs)",
             default=100,
             type=int
         )
         self.options, _ = parser.parse_known_args()
-        self.twitter  = TwitterStreamer()
+        self.twitter = TwitterStreamer()
         self.trend = None
         self.streamer = None
 

@@ -3,10 +3,10 @@ from threading import Thread
 
 class PropagatingThread(Thread):
     """PropagatingThread is just a fancy wrapper for Thread to manage exceptions.
-    
+
     Raises:
         self.exception: Exception defined in higher-level.
-    
+
     Returns:
         self.ret: Thread target object.
     """

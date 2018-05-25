@@ -5,10 +5,10 @@ import importlib
 
 def delete_links(string):
     """Delete links from input string
-    
+
     Args:
         string (str): string to delete links
-    
+
     Returns:
         str: string without links
     """
@@ -18,10 +18,10 @@ def delete_links(string):
 
 def delete_mentions(string):
     """Delete at marks from input string
-    
+
     Args:
         string (str): string to delete at marks
-    
+
     Returns:
         str: string without at marks.
     """

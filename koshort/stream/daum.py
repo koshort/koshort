@@ -27,12 +27,12 @@ def get_current_trend():
     counts = []
     keywords = []
 
-    item_list = soup.find("div", {"class":"realtime_part"}).findAll("div", {"class":"roll_txt"})
-    item_list = [item.find("div", {"class":"rank_cont"}) for item in item_list]
+    item_list = soup.find("div", {"class": "realtime_part"}).findAll("div", {"class": "roll_txt"})
+    item_list = [item.find("div", {"class": "rank_cont"}) for item in item_list]
 
     for item in item_list:
-        count = item.find("span", {"class":"ir_wa"}).getText()
-        keyword = item.find("span", {"class":"txt_issue"}).getText()
+        count = item.find("span", {"class": "ir_wa"}).getText()
+        keyword = item.find("span", {"class": "txt_issue"}).getText()
         counts.append(count)
         keywords.append(keyword)
 

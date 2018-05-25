@@ -19,7 +19,7 @@ def _process(response):
 class Request(object):
     def __init__(self, process=_process):
         """Asynchronous request API
-        
+
         Args:
             process (callable, optional): Defaults to _process.
                 pass a custom processing function after getting response if needed.
@@ -28,10 +28,10 @@ class Request(object):
         assert callable(process)
         self.header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'}
-    
+
     async def get(self, url, process=_process, connector_limit=100):
         """Asynchronous get request and custom postprocessing
-        
+
         Args:
             url (str): url to request get
             process (callable, optional): Defaults to _process. 
@@ -47,7 +47,7 @@ class Request(object):
 
     async def post(self, url, process=_process, connector_limit=100, data=None):
         """Asynchronous post request and custom postprocessing
-        
+
         Args:
             url (str): url to request get
             process (callable, optional): Defaults to _process. 
@@ -64,7 +64,7 @@ class Request(object):
 
     def run(self, tasks):
         """Run asynchronous event loop until complete
-        
+
         Args:
             tasks (collections.Iterable): Iterable tasks to be executed
         """

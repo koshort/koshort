@@ -15,7 +15,7 @@ from koshort.threading import PropagatingThread
 
 def get_current_trend():
     """Get current top trending words from naver
-    
+
     Returns:
         counts: list of count
         keywords: list of keyword
@@ -27,18 +27,18 @@ def get_current_trend():
     counts = []
     keywords = []
 
-    for item in soup.find("div", {"class":"ah_roll_area PM_CL_realtimeKeyword_rolling"}).findAll("li", {"class":"ah_item"}):
-        count = item.find("span", {"class":"ah_r"}).getText()
-        keyword = item.find("span", {"class":"ah_k"}).getText()
+    for item in soup.find("div", {"class": "ah_roll_area PM_CL_realtimeKeyword_rolling"}).findAll("li", {"class": "ah_item"}):
+        count = item.find("span", {"class": "ah_r"}).getText()
+        keyword = item.find("span", {"class": "ah_k"}).getText()
         counts.append(count)
         keywords.append(keyword)
-    
+
     return counts, keywords
 
 
 class NaverStreamer(BaseStreamer):
     """NaverStreamer helps to stream naver trending keywords asynchronously.
-    
+
     .. code-block:: python
 
         >>> from koshort.stream import naver
@@ -57,25 +57,25 @@ class NaverStreamer(BaseStreamer):
 
         parser = self.get_parser()
         parser.add_argument(
-            '-d', '--display_rank', 
-            help="display rank in results and commandline.", 
+            '-d', '--display_rank',
+            help="display rank in results and commandline.",
             action="store_true"
         )
         parser.add_argument(
-            '-i', '--interval', 
-            help="streaming interval(secs)", 
+            '-i', '--interval',
+            help="streaming interval(secs)",
             default=60,
             type=int
         )
         parser.add_argument(
-            '-n', '--n_limits', 
-            help="stop when this amount of trends are collected. 0 for forever", 
+            '-n', '--n_limits',
+            help="stop when this amount of trends are collected. 0 for forever",
             default=10,
             type=int
         )
         parser.add_argument(
-            '--filename', 
-            help="filename to be saved.", 
+            '--filename',
+            help="filename to be saved.",
             default="trends.txt"
         )
 
@@ -92,7 +92,7 @@ class NaverStreamer(BaseStreamer):
                 self.writer.write(pair)
                 if self.options.verbose:
                     print(pair)
-                
+
         else:
             for keyword in keywords:
                 self.writer.write(keyword)
@@ -101,7 +101,7 @@ class NaverStreamer(BaseStreamer):
 
     def job(self):
         """Streaming job with intervals.
-        
+
         Args:
             interval (int): Time interval
         """

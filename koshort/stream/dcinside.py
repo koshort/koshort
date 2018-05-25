@@ -72,8 +72,8 @@ class DCInsideStreamer(BaseStreamer):
             action='store_true',
         )
         parser.add_argument(
-            '--filename', 
-            help="filename to be saved.", 
+            '--filename',
+            help="filename to be saved.",
             default="gallery.txt"
         )
 
@@ -83,24 +83,24 @@ class DCInsideStreamer(BaseStreamer):
         self._view_url = 'http://gall.dcinside.com/board/view'
         self._comment_view_url = 'http://gall.dcinside.com/board/view'
         self._current_post_id = self.options.init_post_id
-    
+
         self._strainer = SoupStrainer('div', attrs={'class': [
             're_gall_top_1',    # 제목, 글쓴이, 작성시각
             'btn_recommend',    # 추천, 비추천
-            'gallery_re_title', # 댓글
+            'gallery_re_title',  # 댓글
             's_write',          # 본문
         ]})
         # Custom header is required in order to request.
         self.header = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'}
 
-    def request_post(self, gallery_id,  post_no):
+    def request_post(self, gallery_id, post_no):
         """Request dcinside post
-        
+
         Args:
             gallery_id (str): predefined id of gallery
             post_no (int): integer of post number
-        
+
         Returns:
             response: response of requests
         """
@@ -115,7 +115,7 @@ class DCInsideStreamer(BaseStreamer):
         Args:
             headers (dict): request headers
             data (dict): data to be used
-        
+
         Returns:
             response: response of requests
         """
@@ -127,7 +127,7 @@ class DCInsideStreamer(BaseStreamer):
             # Site's anti-bot policy may block crawling & you can consider gentle crawling
             time.sleep(self.options.interval)
             response = self.request_post(gallery_id, post_no)
-                
+
             try:
                 post = self.parse_post(response.text, 'lxml', self._strainer)
             except AttributeError:
@@ -176,12 +176,12 @@ class DCInsideStreamer(BaseStreamer):
         def summary(result):
             if not self.options.metadata_to_dict:
                 if self.options.verbose:
-                    print(Fore.CYAN+result['title']+Fore.RESET)
-                    print(Fore.CYAN+Style.DIM+result['written_at']+Style.RESET_ALL+Fore.RESET)
+                    print(Fore.CYAN + result['title'] + Fore.RESET)
+                    print(Fore.CYAN + Style.DIM + result['written_at'] + Style.RESET_ALL + Fore.RESET)
                     print(result['body'])
-                writer.write("@title:"+result['title'])
-                writer.write("@written_at:"+result['written_at'])
-                writer.write("@body:"+result['body'])
+                writer.write("@title:" + result['title'])
+                writer.write("@written_at:" + result['written_at'])
+                writer.write("@body:" + result['body'])
             else:
                 if self.options.verbose:
                     pprint(result)
@@ -239,7 +239,6 @@ class DCInsideStreamer(BaseStreamer):
         }
 
         return post
-
 
     @staticmethod
     def parse_comments(text):

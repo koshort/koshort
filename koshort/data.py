@@ -14,7 +14,7 @@ def clear():
 
     """
 
-    items = glob.glob(DATA_DIR+"*")
+    items = glob.glob(DATA_DIR + "*")
     for item in items:
         os.remove(item)
 
@@ -26,7 +26,7 @@ def listdir():
 
         >>> import koshort
         >>> koshort.listdir()
-    
+
     """
 
     print(os.listdir(DATA_DIR))
@@ -50,7 +50,7 @@ class CorpusReader(object):
             content of corpus
         """
 
-        self.items = glob.glob(DATA_DIR+"*"+extension)
+        self.items = glob.glob(DATA_DIR + "*" + extension)
         self.corpus = {}
 
     def read(self):
@@ -65,7 +65,7 @@ class CorpusReader(object):
 
 class StringWriter(object):
     def __init__(self, filename):
-        self.writer = open(DATA_DIR+filename, mode='a', encoding='utf-8')
+        self.writer = open(DATA_DIR + filename, mode='a', encoding='utf-8')
 
     def write(self, string):
         self.writer.write(string)
