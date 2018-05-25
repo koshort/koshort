@@ -7,13 +7,13 @@ Subpackages
 .. toctree::
 
     koshort.stream
-    koshort.tag
 
 Submodules
 ----------
 
 .. toctree::
 
+   koshort.async
    koshort.constants
    koshort.data
    koshort.dictionary
