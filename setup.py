@@ -4,7 +4,8 @@ import os
 import sys
 from setuptools import find_packages, setup
 
-__version__ = '0.4.1.3'
+__version__ = '0.4.1.4'
+
 
 def requirements():
     def _openreq(reqfile):
@@ -14,7 +15,9 @@ def requirements():
     if sys.version_info >= (3, ):
         return _openreq('requirements.txt')
     else:
-        raise Exception("Koshort does not support python2.* distribution. consider using python3 which supports richer text formatting capability and code productivity.")
+        raise Exception(
+            "Koshort does not support python2.* distribution. consider using python3 which supports richer text formatting capability and code productivity.")
+
 
 setup(
     name='koshort',
@@ -55,7 +58,7 @@ Koshort is hardly inspired by the project KoNLPy, with similar philosophy. It is
         'Topic :: Text Processing :: Linguistic',
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-        ],
+    ],
     entry_points={
         'console_scripts': [
             'stream_twitter = koshort.stream.twitter:main',
