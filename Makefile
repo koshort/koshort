@@ -10,29 +10,25 @@ build:
 	python setup.py sdist --formats=gztar,zip
 
 build_docs:
-	docs/build.bat
-	cd docs\
-		&& sphinx-apidoc -o docs/
+	del docs\koshort*.rst
+	sphinx-apidoc -F -o docs koshort/ --separate
+	docs\make.bat html
 
 check:
 	pyroma .
-	pylint --ignore=E501 koshort
+	pycodestyle koshort --ignore E501
 
 fix:
 	autopep8 koshort --recursive --in-place --pep8-passes 2000 --verbose --ignore E501
 
 testpypi:
-	sudo python setup.py register -r pypitest
-	sudo python setup.py sdist --formats=gztar,zip upload -r pypitest
-	sudo python setup.py bdist_wheel upload -r pypitest
+	twine upload --repository-url https://test.pypi.org/legacy/ dist/*.tar.gz
 
 pypi:
-	sudo python setup.py register -r pypi
-	sudo python setup.py sdist --formats=gztar,zip upload -r pypi
-	sudo python setup.py bdist_wheel upload -r pypi
+	twine upload --repository-url https://upload.pypi.org/legacy/ dist/*.tar.gz
 
-testall:
-	python -m pytest --cov=koshort test/
+test:
+	python -m pytest --cov=koshort tests/
 
 extract_i18n:
 	cd docs\
