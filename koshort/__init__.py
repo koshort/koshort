@@ -13,8 +13,6 @@ You can use following tricks when you use them.
 """
 from __future__ import absolute_import
 
-import pkg_resources
-
 from koshort.about import *
 from koshort.data import clear, listdir
 from koshort import stream  # Subpackage pre-loading
