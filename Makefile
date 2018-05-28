@@ -6,7 +6,10 @@
 # 5. Document update at RTD (latest)
 # 6. Push tag
 
-build:
+build_package:
+	del dist\*.egg  # These code is only for windows
+	del dist\*.whl
+	del dist\*.tar.gz
 	python setup.py sdist --formats=gztar,zip
 
 build_docs:
