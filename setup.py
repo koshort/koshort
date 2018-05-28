@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 
+import io
 import os
 import sys
 from setuptools import find_packages, setup
 
-__version__ = '0.4.1.5'
+
+def get_version():
+    about = {}
+    root = os.path.abspath(os.path.dirname(__file__))
+    with io.open(os.path.join(root, 'koshort', 'about.py'), encoding='utf-8') as f:
+        exec(f.read(), about)
+
+    return about
 
 
 def requirements():
@@ -19,54 +27,60 @@ def requirements():
             "Koshort does not support python2.* distribution. consider using python3 which supports richer text formatting capability and code productivity.")
 
 
-setup(
-    name='koshort',
-    version=__version__,
-    description='koshort is a Python package for Korean internet spoken language crawling and processing... or maybe Korean domestic cat.',
-    long_description="""\
-Social network services and other internet communities are open and rich data source of human spoken language.
-But due to the issues of privacy and policy of each website, sharing a bunch of retrieved text data is normally prohibited.
-To solve the most major Natural Language Processing (NLP) problem under this circumstances, researchers had to rely on limited public datasets and data brought by their company.
-Otherwise they would implement their domain-specific crawler for each case.
+def setup_package():
+    about = get_version()
+    setup(
+        name='koshort',
+        version=about['__version__'],
+        description='koshort is a Python package for Korean internet spoken language crawling and processing... or maybe Korean domestic cat.',
+        long_description="""\
+    Social network services and other internet communities are open and rich data source of human spoken language.
+    But due to the issues of privacy and policy of each website, sharing a bunch of retrieved text data is normally prohibited.
+    To solve the most major Natural Language Processing (NLP) problem under this circumstances, researchers had to rely on limited public datasets and data brought by their company.
+    Otherwise they would implement their domain-specific crawler for each case.
 
-Koshort is hardly inspired by the project KoNLPy, with similar philosophy. It is not about recreating another crawler but to unify efforts around so that anyone can accelerate their projects.
-        """,
-    url='http://koshort.readthedocs.io',
-    author='nyanye',
-    author_email='iam@nyanye.com',
-    keywords=['Korean', 'CJK',
-              'NLP', 'natural language processing',
-              'CL', 'computational linguistics',
-              'tagging', 'tokenizing', 'linguistics', 'text analytics'],
-    classifiers=[
-        'Intended Audience :: Developers',
-        'Intended Audience :: Education',
-        'Intended Audience :: Information Technology',
-        'Intended Audience :: Science/Research',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Topic :: Scientific/Engineering',
-        'Topic :: Scientific/Engineering :: Artificial Intelligence',
-        'Topic :: Scientific/Engineering :: Human Machine Interfaces',
-        'Topic :: Scientific/Engineering :: Information Analysis',
-        'Topic :: Text Processing',
-        'Topic :: Text Processing :: Filters',
-        'Topic :: Text Processing :: General',
-        'Topic :: Text Processing :: Indexing',
-        'Topic :: Text Processing :: Linguistic',
-        'Development Status :: 4 - Beta',
-        'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
-    ],
-    entry_points={
-        'console_scripts': [
-            'stream_twitter = koshort.stream.twitter:main',
-            'stream_naver = koshort.stream.naver:main',
-            'stream_daum = koshort.stream.daum:main',
-            'stream_dcinside = koshort.stream.dcinside:main',
+    Koshort is hardly inspired by the project KoNLPy, with similar philosophy. It is not about recreating another crawler but to unify efforts around so that anyone can accelerate their projects.
+            """,
+        url='http://koshort.readthedocs.io',
+        author='nyanye',
+        author_email='iam@nyanye.com',
+        keywords=['Korean', 'CJK',
+                'NLP', 'natural language processing',
+                'CL', 'computational linguistics',
+                'tagging', 'tokenizing', 'linguistics', 'text analytics'],
+        classifiers=[
+            'Intended Audience :: Developers',
+            'Intended Audience :: Education',
+            'Intended Audience :: Information Technology',
+            'Intended Audience :: Science/Research',
+            'Programming Language :: Python :: 3.3',
+            'Programming Language :: Python :: 3.4',
+            'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
+            'Topic :: Scientific/Engineering',
+            'Topic :: Scientific/Engineering :: Artificial Intelligence',
+            'Topic :: Scientific/Engineering :: Human Machine Interfaces',
+            'Topic :: Scientific/Engineering :: Information Analysis',
+            'Topic :: Text Processing',
+            'Topic :: Text Processing :: Filters',
+            'Topic :: Text Processing :: General',
+            'Topic :: Text Processing :: Indexing',
+            'Topic :: Text Processing :: Linguistic',
+            'Development Status :: 4 - Beta',
+            'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         ],
-    },
-    license='GPL v3+',
-    packages=find_packages(),
-    install_requires=requirements())
+        entry_points={
+            'console_scripts': [
+                'stream_twitter = koshort.stream.twitter:main',
+                'stream_naver = koshort.stream.naver:main',
+                'stream_daum = koshort.stream.daum:main',
+                'stream_dcinside = koshort.stream.dcinside:main',
+            ],
+        },
+        license='GPL v3+',
+        packages=find_packages(),
+        install_requires=requirements())
+
+
+if __name__ == "__main__":
+    setup_package()
