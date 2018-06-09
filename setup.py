@@ -74,6 +74,7 @@ def setup_package():
                 'stream_twitter = koshort.stream.twitter:main',
                 'stream_naver = koshort.stream.naver:main',
                 'stream_daum = koshort.stream.daum:main',
+                'stream_google = koshort.stream.google_trend:main',
                 'stream_dcinside = koshort.stream.dcinside:main',
             ],
         },
