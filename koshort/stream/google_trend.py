@@ -12,6 +12,7 @@ import colorama
 from colorama import Style, Fore
 from pprint import pprint
 
+
 class GoogleTrendStreamer(BaseStreamer):
     """Google is a biggest website in the world.
     GoogleTrendStreamer helps to stream trends from past to future.
@@ -21,11 +22,6 @@ class GoogleTrendStreamer(BaseStreamer):
         self.is_async = is_async
 
         parser = self.get_parser()
-        # parser.add_argument(
-        #     '--include_articles',
-        #     help='include articles',
-        #     action='store_true'
-        # )
         parser.add_argument(
             '--init_date',
             help='initial post_id to start crawling',
@@ -35,11 +31,6 @@ class GoogleTrendStreamer(BaseStreamer):
             '--final_date',
             help='final post_id to stop crawling',
             default=datetime.today().strftime("%Y%m%d")
-        )
-        parser.add_argument(
-            '--forever',
-            help='try crawling for forever',
-            action='store_true'
         )
         parser.add_argument(
             '--timeout',
@@ -80,7 +71,7 @@ class GoogleTrendStreamer(BaseStreamer):
         Returns:
             response: response of requests
         """
-        query = {"hl":"ko","geo":"KR", 'ed':date}
+        query = {"hl": "ko", "geo": "KR", 'ed': date}
         response = self._session.get(self._trend_url, params=query, timeout=self.options.timeout)
         return response
 
@@ -103,8 +94,8 @@ class GoogleTrendStreamer(BaseStreamer):
             return None
 
     def parse_trend(self, content):
+        # Preprocessing
         def preprocess(text):
-            ### Preprocessing
             text = text.decode('unicode_escape')
             # 첫줄이')]}\',와 같은 의미없는 문자가 들어있어서 제외
             text = text.split('\n')[1]
@@ -114,12 +105,12 @@ class GoogleTrendStreamer(BaseStreamer):
         trenddata = json.loads(preprocess(content))
         trendlist, date = self._get_trendlist_of_date(trenddata)
         trendlist = [
-                      { 'title' : trend['title']['query'],
-                        'traffic' : trend['formattedTraffic'],
-                        # 'article_list' : trend['articles'],
-                        'date' : date
-                      } for trend in trendlist
-                    ]
+            {'title': trend['title']['query'],
+             'traffic': trend['formattedTraffic'],
+             # 'article_list' : trend['articles'],
+             'date': date
+             } for trend in trendlist
+        ]
         return trendlist
 
     def job(self):
@@ -132,7 +123,7 @@ class GoogleTrendStreamer(BaseStreamer):
                     if self.options.verbose:
                         print(Fore.CYAN + content['date'] + Fore.RESET)
                         print(Fore.CYAN + Style.DIM + content['title'] + Style.RESET_ALL + Fore.RESET)
-                        print(Fore.CYAN + Style.DIM*2 + content['traffic'] + Style.RESET_ALL + Fore.RESET)
+                        print(Fore.CYAN + Style.DIM * 2 + content['traffic'] + Style.RESET_ALL + Fore.RESET)
                     writer.write("@date:" + content['date'])
                     writer.write("@title:" + content['title'])
                     writer.write("@traffic:" + content['traffic'])
@@ -146,14 +137,13 @@ class GoogleTrendStreamer(BaseStreamer):
             start = datetime.strptime(start_date, '%Y%m%d')
             end = datetime.strptime(end_date, '%Y%m%d')
             date_range = [(end - timedelta(days=x)).strftime("%Y%m%d")
-                            for x in range(0, (end-start).days+1)]
+                          for x in range(0, (end - start).days + 1)]
             return date_range
 
         for date in get_date_range(self.options.init_date, self.options.final_date):
             result = self.get_trend(date)
             if result is not None:
                 summary(result)
-
 
     @staticmethod
     def _convert_utf8_to_euckr(unicode_str):
@@ -166,7 +156,7 @@ class GoogleTrendStreamer(BaseStreamer):
             if(trend['date'] == target_date):
                 return trend['trendingSearches'], trend['date']
 
-        return trends_list[0]['trendingSearches'], trends_list[0]['date'] # default, most recently
+        return trends_list[0]['trendingSearches'], trends_list[0]['date']  # default, most recently
 
 
 def main():
