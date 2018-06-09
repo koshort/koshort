@@ -8,7 +8,7 @@ __all__ = [
     "__copyright__",
 ]
 
-__version__ = '0.4.1.6'
+__version__ = '0.4.1.7'
 __title__ = 'koshort'
 __author__ = 'nyanye'
 __license__ = 'GPL v3'
