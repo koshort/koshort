@@ -20,9 +20,6 @@
 * English Documentation: [http://koshort.readthedocs.io/](http://koshort.readthedocs.io/)
 * 한국어 문서: [http://koshort.readthedocs.io/ko/latest/](http://koshort.readthedocs.io/ko/latest)
 
-## Koshort :purple_heart: KoNLPy
-[KoNLPy와 Koshort의 통합이 진행되고 있습니다!](https://github.com/konlpy/konlpy/issues/202)
-
 ## Installation
 The easiest way to install the latest version is by using pip/easy_install to pull it from PyPI:
 
